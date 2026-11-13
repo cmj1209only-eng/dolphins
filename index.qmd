@@ -1,0 +1,85 @@
+---
+title: "Bottlenose Dolphins of Sarasota Bay"
+subtitle: "Nearly four decades of monthly sighting patterns along Florida's Gulf Coast"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(maps)
+
+dolphins <- read_csv("data/sarasota_dolphins.csv") |>
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter (Dec–Feb)",
+      month %in% c(3, 4, 5)  ~ "Spring (Mar–May)",
+      month %in% c(6, 7, 8)  ~ "Summer (Jun–Aug)",
+      TRUE                   ~ "Autumn (Sep–Nov)"
+    ) |>
+      factor(levels = c(
+        "Winter (Dec–Feb)",
+        "Spring (Mar–May)",
+        "Summer (Jun–Aug)",
+        "Autumn (Sep–Nov)"
+      ))
+  )
+
+fl_coast <- map_data("county", "florida")
+```
+
+Since 1970, the **Sarasota Dolphin Research Program (SDRP)** has conducted the world's longest-running study of a wild dolphin community. Drawing on **6,391 boat-based surveys** (recording **30,980 individual dolphin observations** from 1971 to 2009) alongside life-history findings from [Wells et al. (2025)](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full), this site examines how Sarasota Bay's resident bottlenose dolphins (*Tursiops truncatus*) shift their group sizes and locations across the months of the year.
+
+```{r}
+#| fig-width: 9
+#| fig-height: 7
+
+ggplot() +
+  # Draw nearby Florida counties for coastline context
+  geom_polygon(
+    data = fl_coast,
+    aes(x = long, y = lat, group = group),
+    fill = "#f0efe9",
+    color = "#c7c4b8",
+    linewidth = 0.3
+  ) +
+  # Plot all 6,391 dolphin sighting locations
+  geom_point(
+    data = dolphins,
+    aes(x = lon, y = lat, color = group_size, size = group_size),
+    alpha = 0.45
+  ) +
+  coord_quickmap(xlim = c(-82.95, -82.15), ylim = c(26.55, 27.68)) +
+  scale_color_viridis_c(
+    option = "mako",
+    direction = -1,
+    trans = "log10",
+    name = "Pod Size"
+  ) +
+  scale_size_continuous(
+    range = c(0.6, 3.5),
+    guide = "none"
+  ) +
+  facet_wrap(~season, ncol = 2) +
+  labs(
+    title = "6,391 Bottlenose Dolphin Sightings Around Sarasota Bay (1971–2009)",
+    subtitle = "Sightings cluster inside protected bay waters year-round, with denser and larger pods in Summer and Autumn",
+    x = "Longitude (°W)",
+    y = "Latitude (°N)",
+    caption = "Source: Sarasota Dolphin Research Program via OBIS-SEAMAP (Wells, Tyson & Allen, 2017)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.background = element_rect(fill = "#e6f2f8", color = NA),
+    panel.grid = element_line(color = "#d4e6ef", linewidth = 0.3),
+    strip.text = element_text(face = "bold", size = 11),
+    plot.title = element_text(face = "bold", size = 14)
+  )
+```
+
+### Explore the Project
+
+- **[Monthly Sightings Explorer](seasonal-explorer.qmd)** *(Exploration)*: Filter the most recent five years of survey data (2005–2009) by month and year on an interactive map and monthly chart.
+- **[Summer Nurseries & Life History](summer-nurseries.qmd)** *(Story)*: Why dolphin pods swell by nearly 60% from February to September—connecting our sighting records to 50+ years of calving and survival research.
