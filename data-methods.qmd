@@ -1,0 +1,57 @@
+---
+title: "Scientific Context, Data Sources & Methodology"
+subtitle: "Research background, verified 2021–2026 dataset documentation, and methodological limitations"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE)
+```
+
+## 1. Scientific Context: Sarasota Bay's Resident Dolphins
+
+Sarasota Bay is a shallow, 56-mile coastal lagoon system along Florida's central Gulf Coast, sheltered by barrier islands (Anna Maria Island, Longboat Key, Lido Key, Siesta Key, and Casey Key) and carpeted with seagrass meadows, mangrove fringes, oyster bars, and tidal passes. Since **1970**, the **[Sarasota Dolphin Research Program (SDRP)](https://sarasotadolphin.org/)**—a partnership of Brookfield Zoo Chicago and Mote Marine Laboratory—has maintained the world's longest-running study of a wild cetacean community.
+
+- **Dorsal-Fin Photo-Identification & FinBase:** Every adult bottlenose dolphin (*Tursiops truncatus*) acquires distinctive nicks and notches along the trailing edge of its dorsal fin. SDRP conducts monthly boat-based photo-ID surveys and catalogs individual life histories in **FinBase**, tracking five generations of multi-decade residents.
+- **Demographic & Life-History Findings ([Wells et al., 2025](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full)):** Across **482 resident individuals**, females live up to **67 years** (males **52 years**), give birth mainly in **May–July (81% of births)** at an average **3.5-year interval**, and show near-zero immigration (**0.003–0.013/year**).
+- **Acoustic Monitoring & Signature Whistles ([SBLN](https://sarasotadolphin.org/sbln-website/)):** Because murky estuarine water and nighttime darkness limit visual sightings, SDRP and collaborators operate the **Sarasota Bay Listening Network (SBLN / PALS Network)**—shore-based underwater hydrophones that continuously detect echolocation clicks and individualized **signature whistles** used by mothers and calves to maintain contact.
+- **Environmental & Human Pressures:** Peer-reviewed SDRP research identifies *Karenia brevis* harmful algal blooms (red tide), recreational boat strikes, fishing-gear entanglement/ingestion, and seagrass habitat loss as the primary threats affecting resident survival.
+
+---
+
+## 2. Data Sources & Verification Audit (January 2021 – December 2026)
+
+All data downloaded and verified on **November 13, 2026**. No synthetic, simulated, or pre-2021 observations are included anywhere on this website.
+
+| Source / Repository | URL | 2021–2026 Access Status | Verified Observation Count | Role in Project |
+|---|---|---|---:|---|
+| **GBIF Occurrence API (*Tursiops truncatus*, Florida)** | [gbif.org](https://www.gbif.org/occurrence/search?taxon_key=2440483&year=2021,2026) | **Publicly Downloadable** | **2,206** unique sightings (`207` inside Sarasota Bay box; `680` in Tampa Bay & Charlotte Harbor) | Primary 2021–2026 visual sighting dataset (`data/florida_dolphins_2021_2026.csv`) |
+| **Wells et al. (2025), *Frontiers in Marine Science*** | [doi:10.3389/fmars.2025.1531528](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full) | **Open-Access Peer-Reviewed Study** | **482** resident life histories (50+ yr synthesis) | Demographic, calving, lifespan, and residency benchmarks |
+| **SDRP FinBase (2010–2026 Boat Surveys)** | [sarasotadolphin.org](https://sarasotadolphin.org/) | **Permission Required** (Public OBIS/GBIF export `bb7c6f27-...` / `6cc99ecb-...` ends in 2009) | *Restricted post-2009* | Documented; pre-2021 records excluded per 2021–2026 scope |
+| **Sarasota Bay Listening Network (SBLN / PALS)** | [sarasotadolphin.org/sbln-website](https://sarasotadolphin.org/sbln-website/) | **Permission Required** (Raw CNN whistle CSVs not hosted for public bulk download) | *0 public CSV rows* | 5 published station locations mapped as reference markers only |
+| **Sarasota County Water Atlas (USF)** | [sarasota.wateratlas.usf.edu](https://sarasota.wateratlas.usf.edu/) | **Public** (Water quality / physical metrics only) | *0 dolphin sighting rows* | Audited during Requirement 1 verification |
+
+---
+
+## 3. Geographic Boundaries, Cleaning & Missing Data
+
+- **Study Boundaries:** Because Sarasota Bay alone contains `207` public visual sightings for 2021–2026, the dataset encompasses **Florida coastal waters (`24.4°N–31.0°N, 87.6°W–79.8°W`; n = 2,206)** while explicitly isolating the **Sarasota Bay Study Area (`26.85°N–27.56°N, 82.85°W–82.30°W`; n = 207)**—matching SDRP's Anna Maria Sound to Venice/Lemon Bay corridor—and adjacent **Tampa Bay & Charlotte Harbor (`26.40°N–28.20°N, 83.20°W–82.00°W`; n = 680)**.
+- **Deduplication:** Records were deduplicated on unique `gbif_id` (`2,206` unique occurrences across `1,110` distinct calendar dates).
+- **Documented Missing Values (Never Imputed):**
+  - **December 2026:** Marked `Unavailable (NA)` across all 72-month charts because data were retrieved on **November 13, 2026**.
+  - **Clock Timestamps:** Present in **2,101 of 2,206 records (95.2%)**; the `105` date-only records are excluded from hourly analyses rather than assigned a default hour.
+  - **Pod Size (`group_size`):** Explicitly reported in **259 of 2,206 records (11.7%)**; the remaining `1,947` presence-only records are stored as `NA` rather than assumed to be `1`.
+
+---
+
+## 4. Methodological Limitations & Biases
+
+1. **Visual Effort Bias:** Citizen-science sightings depend on fair weather, daylight, and shoreline/boater access. Lower counts at night, in mid-bay open water, or during August–October hurricane months reflect **reduced human observation effort**, not dolphin absence.
+2. **Acoustic vs. Visual Metrics:** Acoustic hydrophone detections measure **vocal activity rate** within a station's listening radius (~500–1,500 m)—a single whistling pod can trigger hundreds of detections per hour, whereas silent foraging dolphins go undetected acoustically. Visual sightings and acoustic detections therefore measure complementary dimensions of presence and are never merged into a single raw count.
+3. **Sightings vs. Abundance:** Repeated sightings of long-lived resident dolphins over time cannot be summed to estimate population size without formal mark–recapture photo-identification modeling.

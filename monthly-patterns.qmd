@@ -1,0 +1,152 @@
+---
+title: "Monthly & Seasonal Patterns (2021–2026)"
+subtitle: "Compare dolphin presence across all 72 months, years, and coastal zones"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(plotly)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE)
+
+# Complete 72-month grid (Jan 2021 - Dec 2026)
+grid_72 <- expand_grid(
+  year = 2021:2026,
+  month = 1:12
+) |>
+  mutate(
+    month_abb = factor(month.abb[month], levels = month.abb),
+    ym_date = make_date(year, month, 1),
+    is_unavailable = (year == 2026 & month == 12)
+  )
+
+monthly_all <- grid_72 |>
+  left_join(
+    dolphins |>
+      summarize(
+        fl_sightings = n(),
+        sarasota_sightings = sum(region == "Sarasota Bay Study Area"),
+        suncoast_sightings = sum(region %in% c("Sarasota Bay Study Area", "Tampa Bay & Charlotte Harbor")),
+        .by = c(year, month)
+      ),
+    by = c("year", "month")
+  ) |>
+  mutate(
+    fl_sightings = if_else(is_unavailable, NA_integer_, replace_na(fl_sightings, 0L)),
+    sarasota_sightings = if_else(is_unavailable, NA_integer_, replace_na(sarasota_sightings, 0L)),
+    suncoast_sightings = if_else(is_unavailable, NA_integer_, replace_na(suncoast_sightings, 0L)),
+    year_str = as.character(year)
+  )
+```
+
+Explore how verified visual sightings vary month by month from **January 2021 through December 2026**. Click any year in the legend to isolate or compare specific years. (**December 2026** is explicitly marked `NA` because the dataset was retrieved on November 13, 2026; acoustic detection totals are omitted because public SBLN CSV logs are restricted.)
+
+### Year-over-Year Monthly Comparison — Sarasota Bay Study Area
+
+```{r}
+plot_ly(
+  data = monthly_all,
+  x = ~month_abb,
+  y = ~sarasota_sightings,
+  color = ~year_str,
+  colors = c("#0b2545", "#137c8b", "#2a9d8f", "#8ab17d", "#f4a261", "#e63946"),
+  type = "scatter",
+  mode = "lines+markers",
+  text = ~if_else(
+    is_unavailable,
+    "<b>Dec 2026</b>: Unavailable (future month)",
+    paste0(
+      "<b>", month.name[month], " ", year, "</b><br>",
+      "Sarasota Bay Sightings: ", sarasota_sightings, "<br>",
+      "Greater Suncoast (Tampa–Sarasota–Charlotte): ", suncoast_sightings, "<br>",
+      "All Florida Coast: ", fl_sightings
+    )
+  ),
+  hoverinfo = "text"
+) |>
+  layout(
+    title = "Sarasota Bay Monthly Visual Sightings by Year (click legend to toggle years)",
+    xaxis = list(title = "Month of Year"),
+    yaxis = list(title = "Verified Sightings in Sarasota Bay"),
+    legend = list(title = list(text = "Year")),
+    hovermode = "closest"
+  )
+```
+
+### 72-Month Heatmap Across All Six Years (Florida Coast & Sarasota Bay)
+
+Hover over any cell in the 72-month calendar matrix below to see exact monthly totals, seasonal peaks (March–April and June–July), and late-summer troughs (August–October).
+
+```{r}
+heat_df <- monthly_all |>
+  mutate(
+    hover_txt = if_else(
+      is_unavailable,
+      "<b>Dec 2026</b><br>Status: Unavailable (future month)",
+      paste0(
+        "<b>", month.name[month], " ", year, "</b><br>",
+        "All Florida Sightings: ", fl_sightings, "<br>",
+        "Sarasota Bay Sightings: ", sarasota_sightings
+      )
+    )
+  )
+
+plot_ly(
+  data = heat_df,
+  x = ~month_abb,
+  y = ~factor(year, levels = 2026:2021),
+  z = ~fl_sightings,
+  text = ~hover_txt,
+  hoverinfo = "text",
+  type = "heatmap",
+  colors = c("#f7fbff", "#9ecae1", "#3182bd", "#0b2545"),
+  colorbar = list(title = "Sightings")
+) |>
+  layout(
+    title = "72-Month Presence Matrix (Jan 2021 – Dec 2026; gray/blank = Dec 2026 unavailable)",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Year")
+  )
+```
+
+### Monthly Averages & Seasonal Peaks (2021–2026)
+
+```{r}
+monthly_avg <- monthly_all |>
+  filter(!is_unavailable) |>
+  summarize(
+    mean_sarasota = round(mean(sarasota_sightings), 2),
+    mean_fl = round(mean(fl_sightings), 1),
+    .by = c(month, month_abb)
+  ) |>
+  arrange(month)
+
+plot_ly(monthly_avg, x = ~month_abb) |>
+  add_bars(
+    y = ~mean_sarasota,
+    name = "Sarasota Bay Mean / Month",
+    marker = list(color = "#e63946")
+  ) |>
+  add_lines(
+    y = ~mean_fl,
+    name = "All Florida Mean / Month (Right Axis)",
+    yaxis = "y2",
+    line = list(color = "#0b2545", width = 2.5)
+  ) |>
+  layout(
+    title = "Average Monthly Sightings (Jan 2021 – Nov 2026)",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Sarasota Bay Mean Sightings"),
+    yaxis2 = list(
+      title = "All Florida Mean Sightings",
+      overlaying = "y",
+      side = "right"
+    ),
+    legend = list(orientation = "h", y = -0.2)
+  )
+```

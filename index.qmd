@@ -1,6 +1,6 @@
 ---
-title: "Bottlenose Dolphins of Sarasota Bay"
-subtitle: "Nearly four decades of monthly sighting patterns along Florida's Gulf Coast"
+title: "Sarasota Bay & Florida Bottlenose Dolphin Presence (2021–2026)"
+subtitle: "An interactive scientific explorer built from 2,206 verified visual sightings (Jan 2021 – Nov 2026)"
 execute:
   echo: false
   warning: false
@@ -9,77 +9,225 @@ execute:
 
 ```{r}
 library(tidyverse)
-library(maps)
+library(leaflet)
+library(plotly)
+library(crosstalk)
 
-dolphins <- read_csv("data/sarasota_dolphins.csv") |>
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE) |>
   mutate(
-    season = case_when(
-      month %in% c(12, 1, 2) ~ "Winter (Dec–Feb)",
-      month %in% c(3, 4, 5)  ~ "Spring (Mar–May)",
-      month %in% c(6, 7, 8)  ~ "Summer (Jun–Aug)",
-      TRUE                   ~ "Autumn (Sep–Nov)"
-    ) |>
-      factor(levels = c(
-        "Winter (Dec–Feb)",
-        "Spring (Mar–May)",
-        "Summer (Jun–Aug)",
-        "Autumn (Sep–Nov)"
-      ))
+    month_name = factor(month.name[month], levels = month.name),
+    pod_label = if_else(is.na(group_size), "Not counted (presence verified)", paste0(group_size, " dolphin(s)")),
+    obs_category = if_else(
+      region == "Sarasota Bay Study Area",
+      "Visual Sighting — Sarasota Bay Study Area",
+      "Visual Sighting — Broader Florida Coast"
+    ),
+    popup_html = paste0(
+      "<b>", obs_category, "</b><br>",
+      "<b>Date:</b> ", event_date,
+      if_else(!is.na(event_time) & event_time != "", paste0(" (", substr(event_time, 1, 5), ")"), ""), "<br>",
+      "<b>Region:</b> ", region, "<br>",
+      "<b>Pod Count:</b> ", pod_label, "<br>",
+      "<b>Coordinates:</b> ", round(lat, 4), "°N, ", abs(round(lon, 4)), "°W<br>",
+      "<b>Source:</b> ", source
+    )
   )
 
-fl_coast <- map_data("county", "florida")
+# Compute live homepage statistics directly from the dataset
+n_visual      <- nrow(dolphins)
+n_sarasota    <- sum(dolphins$region == "Sarasota Bay Study Area")
+n_days        <- n_distinct(dolphins$event_date)
+n_years       <- n_distinct(dolphins$year)
+top_month_row <- dolphins |> count(month_name, sort = TRUE) |> slice(1)
+top_month_str <- paste0(top_month_row$month_name, " (", top_month_row$n, ")")
+
+# Reference coordinates for major Sarasota Bay waterways
+sarasota_labels <- tibble(
+  name = c(
+    "Sarasota Bay",
+    "Anna Maria Sound",
+    "Palma Sola Bay",
+    "Big Sarasota Pass",
+    "Roberts Bay",
+    "Little Sarasota Bay",
+    "Venice Inlet"
+  ),
+  lat = c(27.375, 27.505, 27.485, 27.275, 27.285, 27.205, 27.113),
+  lon = c(-82.605, -82.700, -82.655, -82.568, -82.542, -82.502, -82.468)
+)
+
+shared_home <- SharedData$new(dolphins)
+
+cat_pal <- colorFactor(
+  palette = c(
+    "Visual Sighting — Sarasota Bay Study Area" = "#e63946",
+    "Visual Sighting — Broader Florida Coast"   = "#137c8b"
+  ),
+  levels = c(
+    "Visual Sighting — Sarasota Bay Study Area",
+    "Visual Sighting — Broader Florida Coast"
+  )
+)
 ```
 
-Since 1970, the **Sarasota Dolphin Research Program (SDRP)** has conducted the world's longest-running study of a wild dolphin community. Drawing on **6,391 boat-based surveys** (recording **30,980 individual dolphin observations** from 1971 to 2009) alongside life-history findings from [Wells et al. (2025)](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full), this site examines how Sarasota Bay's resident bottlenose dolphins (*Tursiops truncatus*) shift their group sizes and locations across the months of the year.
+This research platform investigates common bottlenose dolphin (*Tursiops truncatus*) sightings and seasonal presence from **January 2021 through December 2026**, pairing **2,206 verified GBIF visual sightings** across Florida's coastline (**207 inside the Sarasota Bay focal boundary** and **680 in adjacent Tampa Bay & Charlotte Harbor**) with 50+ years of demographic context from the Sarasota Dolphin Research Program ([Wells et al., 2025](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full)).
 
 ```{r}
-#| fig-width: 9
-#| fig-height: 7
+htmltools::HTML(paste0(
+  '<div class="stat-grid">',
+  '<div class="stat-card"><div class="stat-value">', scales::comma(n_visual), '</div><div class="stat-label">Verified Visual Sightings (2021–2026)</div></div>',
+  '<div class="stat-card"><div class="stat-value">', n_sarasota, '</div><div class="stat-label">Sightings Inside Sarasota Bay Box</div></div>',
+  '<div class="stat-card"><div class="stat-value">0 Public CSVs</div><div class="stat-label">Acoustic Detections (SBLN Restricted*)</div></div>',
+  '<div class="stat-card"><div class="stat-value">', scales::comma(n_days), '</div><div class="stat-label">Unique Observation Days</div></div>',
+  '<div class="stat-card"><div class="stat-value">', n_years, ' Years</div><div class="stat-label">2021–2026 (Dec 2026 Pending)</div></div>',
+  '<div class="stat-card"><div class="stat-value">', top_month_str, '</div><div class="stat-label">Most Frequently Observed Month</div></div>',
+  '</div>'
+))
+```
 
-ggplot() +
-  # Draw nearby Florida counties for coastline context
-  geom_polygon(
-    data = fl_coast,
-    aes(x = long, y = lat, group = group),
-    fill = "#f0efe9",
-    color = "#c7c4b8",
-    linewidth = 0.3
-  ) +
-  # Plot all 6,391 dolphin sighting locations
-  geom_point(
-    data = dolphins,
-    aes(x = lon, y = lat, color = group_size, size = group_size),
-    alpha = 0.45
-  ) +
-  coord_quickmap(xlim = c(-82.95, -82.15), ylim = c(26.55, 27.68)) +
-  scale_color_viridis_c(
-    option = "mako",
-    direction = -1,
-    trans = "log10",
-    name = "Pod Size"
-  ) +
-  scale_size_continuous(
-    range = c(0.6, 3.5),
-    guide = "none"
-  ) +
-  facet_wrap(~season, ncol = 2) +
-  labs(
-    title = "6,391 Bottlenose Dolphin Sightings Around Sarasota Bay (1971–2009)",
-    subtitle = "Sightings cluster inside protected bay waters year-round, with denser and larger pods in Summer and Autumn",
-    x = "Longitude (°W)",
-    y = "Latitude (°N)",
-    caption = "Source: Sarasota Dolphin Research Program via OBIS-SEAMAP (Wells, Tyson & Allen, 2017)"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    panel.background = element_rect(fill = "#e6f2f8", color = NA),
-    panel.grid = element_line(color = "#d4e6ef", linewidth = 0.3),
-    strip.text = element_text(face = "bold", size = 11),
-    plot.title = element_text(face = "bold", size = 14)
+*\*Note on observation types: All 2,206 plotted points are verified visual sightings. Raw hydrophone whistle logs from the Sarasota Bay Listening Network (SBLN) require institutional permission and are documented in [Data & Methods](data-methods.qmd) rather than simulated.*
+
+### Interactive Dolphin Presence Map (2,206 Observations, 2021–2026)
+
+Toggle individual years or coastal zones below, or zoom directly into the **dashed red Sarasota Bay study box** (`26.85°N–27.56°N`, Anna Maria Sound to Venice/Lemon Bay) to inspect waterway labels and individual sightings.
+
+::: {.filter-box}
+```{r}
+filter_checkbox(
+  id = "home_year",
+  label = "Select Survey Year(s) (2021–2026)",
+  sharedData = shared_home,
+  group = ~year,
+  inline = TRUE
+)
+
+filter_select(
+  id = "home_region",
+  label = "Filter by Coastal Study Boundary",
+  sharedData = shared_home,
+  group = ~region
+)
+```
+:::
+
+```{r}
+leaflet(shared_home, height = 540) |>
+  addProviderTiles(providers$CartoDB.Voyager) |>
+  setView(lng = -82.58, lat = 27.35, zoom = 9) |>
+  # Dashed boundary box showing the Sarasota Bay focal study area
+  addRectangles(
+    lng1 = -82.85, lat1 = 26.85,
+    lng2 = -82.30, lat2 = 27.56,
+    fillColor = "transparent",
+    color = "#e63946",
+    weight = 2,
+    dashArray = "6,6",
+    group = "Sarasota Bay Boundary"
+  ) |>
+  # Waterway labels inside Sarasota Bay
+  addLabelOnlyMarkers(
+    data = sarasota_labels,
+    lng = ~lon,
+    lat = ~lat,
+    label = ~name,
+    labelOptions = labelOptions(
+      noHide = TRUE,
+      direction = "center",
+      textOnly = TRUE,
+      style = list(
+        "color" = "#0b2545",
+        "font-weight" = "bold",
+        "font-size" = "11px",
+        "text-shadow" = "1px 1px 2px #ffffff, -1px -1px 2px #ffffff"
+      )
+    ),
+    group = "Sarasota Waterway Labels"
+  ) |>
+  addCircleMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    radius = 5,
+    color = ~cat_pal(obs_category),
+    stroke = TRUE,
+    weight = 1,
+    fillOpacity = 0.72,
+    popup = ~popup_html,
+    group = "Individual Sightings (2,206)"
+  ) |>
+  addLayersControl(
+    overlayGroups = c("Individual Sightings (2,206)", "Sarasota Bay Boundary", "Sarasota Waterway Labels"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) |>
+  addLegend(
+    position = "bottomleft",
+    pal = cat_pal,
+    values = ~obs_category,
+    title = "Observation Type & Zone",
+    opacity = 0.9
   )
 ```
 
-### Explore the Project
+### 72-Month Dolphin Sightings Timeline (January 2021 – December 2026)
 
-- **[Monthly Sightings Explorer](seasonal-explorer.qmd)** *(Exploration)*: Filter the most recent five years of survey data (2005–2009) by month and year on an interactive map and monthly chart.
-- **[Summer Nurseries & Life History](summer-nurseries.qmd)** *(Story)*: Why dolphin pods swell by nearly 60% from February to September—connecting our sighting records to 50+ years of calving and survival research.
+Every month from January 2021 through November 2026 contains verified observations; **December 2026** (future/not yet elapsed as of the November 13, 2026 data pull) is explicitly distinguished as unavailable rather than plotted as zero.
+
+```{r}
+# Build complete 72-month sequence Jan 2021 - Dec 2026
+all_72 <- expand_grid(year = 2021:2026, month = 1:12) |>
+  mutate(
+    ym_date = make_date(year, month, 1),
+    status = if_else(year == 2026 & month == 12, "Unavailable (Future Month)", "Observed")
+  )
+
+monthly_counts <- dolphins |>
+  summarize(
+    total_fl = n(),
+    sarasota_bay = sum(region == "Sarasota Bay Study Area"),
+    .by = c(year, month)
+  )
+
+timeline_72 <- all_72 |>
+  left_join(monthly_counts, by = c("year", "month")) |>
+  mutate(
+    total_fl = if_else(status == "Observed", replace_na(total_fl, 0L), NA_integer_),
+    sarasota_bay = if_else(status == "Observed", replace_na(sarasota_bay, 0L), NA_integer_),
+    hover_fl = if_else(
+      status == "Observed",
+      paste0("<b>", format(ym_date, "%B %Y"), "</b><br>Florida Coast Sightings: ", total_fl, "<br>Sarasota Bay Sightings: ", sarasota_bay),
+      "<b>December 2026</b><br>Data unavailable (month not yet elapsed at Nov 2026 download)"
+    )
+  )
+
+plot_ly(timeline_72, x = ~ym_date) |>
+  add_lines(
+    y = ~total_fl,
+    name = "All Florida Coast (2,206)",
+    line = list(color = "#137c8b", width = 2.2),
+    text = ~hover_fl,
+    hoverinfo = "text"
+  ) |>
+  add_bars(
+    y = ~sarasota_bay,
+    name = "Sarasota Bay Study Area (207)",
+    marker = list(color = "#e63946"),
+    text = ~hover_fl,
+    hoverinfo = "text"
+  ) |>
+  add_markers(
+    data = filter(timeline_72, status != "Observed"),
+    x = ~ym_date,
+    y = 0,
+    name = "Unavailable (Dec 2026)",
+    marker = list(color = "#adb5bd", symbol = "x", size = 10),
+    text = ~hover_fl,
+    hoverinfo = "text"
+  ) |>
+  layout(
+    title = "Monthly Verified Dolphin Sightings Across All 72 Months (Jan 2021 – Dec 2026)",
+    xaxis = list(title = "Month (2021–2026)"),
+    yaxis = list(title = "Verified Visual Sightings"),
+    legend = list(orientation = "h", y = -0.2),
+    barmode = "overlay"
+  )
+```

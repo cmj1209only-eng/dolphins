@@ -1,0 +1,90 @@
+---
+title: "Where Do Sightings Concentrate in Sarasota Bay?"
+subtitle: "Tidal passes, barrier-island bridges, and the difference between human access and dolphin density"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(maps)
+
+suncoast <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE) |>
+  filter(lat >= 26.85, lat <= 27.56, lon >= -82.80, lon <= -82.32) |>
+  mutate(
+    period = if_else(year <= 2023, "2021–2023 (n = 96)", "2024–2026 (n = 111)")
+  )
+
+fl_counties <- map_data("county", "florida")
+
+pass_labels <- tibble(
+  label = c("Anna Maria Sound", "Longboat Pass", "New Pass / City Island", "Big Sarasota Pass", "Venice Inlet"),
+  lat   = c(27.505, 27.442, 27.335, 27.272, 27.113),
+  lon   = c(-82.710, -82.680, -82.595, -82.575, -82.485)
+)
+```
+
+Mapping all **207 verified sightings** inside the Sarasota Bay study boundary (2021–2026) reveals that observations do not spread evenly across open bay waters. Instead, sightings cluster tightly at narrow tidal bottlenecks connecting the bay to the Gulf of Mexico: **Anna Maria Sound and Palma Sola Causeway** in the north, **Longboat Pass**, **New Pass and City Island (Mote Marine Laboratory)**, **Big Sarasota Pass**, and **Venice Inlet** in the south. Comparing the first half of our window (**2021–2023**, 96 sightings) against the second half (**2024–2026**, 111 sightings) shows that these same five coastal corridors persist across both periods.
+
+```{r}
+#| fig-width: 9
+#| fig-height: 6.2
+
+ggplot() +
+  geom_polygon(
+    data = fl_counties,
+    aes(x = long, y = lat, group = group),
+    fill = "#f1efe8",
+    color = "#c4bfb2",
+    linewidth = 0.35
+  ) +
+  stat_bin_2d(
+    data = suncoast,
+    aes(x = lon, y = lat),
+    binwidth = c(0.025, 0.025),
+    alpha = 0.82
+  ) +
+  geom_point(
+    data = suncoast,
+    aes(x = lon, y = lat),
+    color = "#ffffff",
+    size = 0.8,
+    alpha = 0.65
+  ) +
+  geom_text(
+    data = pass_labels,
+    aes(x = lon, y = lat, label = label),
+    size = 2.9,
+    fontface = "bold",
+    color = "#0b2545",
+    hjust = 1.05
+  ) +
+  coord_quickmap(xlim = c(-82.82, -82.34), ylim = c(26.88, 27.55)) +
+  scale_fill_viridis_c(
+    option = "inferno",
+    direction = -1,
+    name = "Sightings\nper Cell"
+  ) +
+  facet_wrap(~period, ncol = 2) +
+  labs(
+    title = "Geographic Heatmap of Sarasota Bay Dolphin Sightings (2021–2023 vs. 2024–2026)",
+    subtitle = "Observations concentrate consistently at barrier-island passes, causeways, and public piers (~2.5 km grid)",
+    x = "Longitude (°W)",
+    y = "Latitude (°N)",
+    caption = "Source: GBIF Verified Visual Occurrences inside Sarasota Bay Study Boundary (n = 207)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.background = element_rect(fill = "#e6f2f8", color = NA),
+    panel.grid = element_line(color = "#d4e6ef", linewidth = 0.3),
+    strip.text = element_text(face = "bold", size = 11),
+    plot.title = element_text(face = "bold", size = 13.5)
+  )
+```
+
+Part of this clustering is genuinely ecological. Tidal inlets like **Big Sarasota Pass** and **Venice Inlet** funnel strong currents between seagrass flats and nearshore Gulf reefs, concentrating mullet, pinfish, and seatrout into predictable foraging lanes where dolphins ambush prey. Meanwhile, protected interior embayments like **Palma Sola Bay** and **Roberts Bay** offer shallow seagrass beds (1–3 m depth) that shelter mothers and calves from open-water bull sharks.
+
+Just as importantly, however, spatial heatmaps of citizen-contributed sightings reflect **human shoreline access**. Causeways, fishing piers, public beaches, and kayak launches sit directly beside Anna Maria Sound, City Island, Ringling Causeway, and Venice Jetty—giving observers unobstructed vantage points without needing a research vessel. Open-water stretches in the middle of Sarasota Bay show fewer grid detections not because dolphins avoid them, but because systematic boat transects (like SDRP's monthly photo-ID surveys) are required to sample mid-bay waters evenly.

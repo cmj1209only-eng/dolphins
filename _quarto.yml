@@ -2,17 +2,34 @@ project:
   type: website
 
 website:
-  title: "Bottlenose Dolphins of Sarasota Bay"
+  title: "Sarasota Bay Dolphin Research Explorer (2021–2026)"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: seasonal-explorer.qmd
-        text: Monthly Sightings Explorer
-      - href: summer-nurseries.qmd
-        text: Summer Nurseries & Life History
+      - text: Explorations
+        menu:
+          - href: geographic-exploration.qmd
+            text: Geographic Distribution
+          - href: monthly-patterns.qmd
+            text: Monthly & Seasonal Patterns
+          - href: activity-analysis.qmd
+            text: Time-of-Day Activity
+          - href: dolphin-groups.qmd
+            text: Dolphin Groups & Population
+      - text: Stories
+        menu:
+          - href: story-seasonality.qmd
+            text: "When Are Dolphins Most Present?"
+          - href: story-hotspots.qmd
+            text: "Where Do Sightings Concentrate?"
+          - href: story-trends.qmd
+            text: "How Presence Changed (2021–2026)"
+      - href: data-methods.qmd
+        text: Data & Methods
 
 format:
   html:
     theme: cosmo
+    css: styles.css
     toc: true

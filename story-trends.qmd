@@ -1,0 +1,88 @@
+---
+title: "How Has Recorded Dolphin Presence Changed From 2021–2026?"
+subtitle: "Tracking six years of observations across citizen-science growth and major Gulf hurricanes"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE)
+
+annual_summary <- dolphins |>
+  summarize(
+    `All Florida Coast` = n(),
+    `Greater Suncoast (Tampa–Sarasota–Charlotte)` = sum(region %in% c("Sarasota Bay Study Area", "Tampa Bay & Charlotte Harbor")),
+    `Sarasota Bay Study Area` = sum(region == "Sarasota Bay Study Area"),
+    .by = year
+  ) |>
+  arrange(year)
+
+quarterly_suncoast <- dolphins |>
+  filter(region %in% c("Sarasota Bay Study Area", "Tampa Bay & Charlotte Harbor")) |>
+  mutate(qtr_date = floor_date(ymd(event_date), "quarter")) |>
+  summarize(
+    suncoast = n(),
+    sarasota = sum(region == "Sarasota Bay Study Area"),
+    .by = qtr_date
+  ) |>
+  arrange(qtr_date)
+```
+
+Between 2021 and 2026, annual verified dolphin sightings rose across both Sarasota Bay and the surrounding central Gulf Coast (`Greater Suncoast`, spanning Tampa Bay, Sarasota Bay, and Charlotte Harbor). Inside Sarasota Bay, annual sightings climbed from **25 in 2021** and **32 in 2022** to **39 in 2023**, dipped to **32 in 2024**, and rebounded to **41 in 2025** and **38 through mid-November 2026**. Across the broader Suncoast estuaries, sightings nearly doubled from **98 in 2021** to **176 in 2025** and **179 in 2026** (even before December 2026 has elapsed).
+
+```{r}
+#| fig-width: 8.8
+#| fig-height: 5.2
+
+ggplot(quarterly_suncoast, aes(x = qtr_date)) +
+  geom_vline(
+    xintercept = as.Date(c("2022-09-28", "2023-08-30", "2024-10-09")),
+    linetype = "dashed",
+    color = "#a4161a",
+    linewidth = 0.6
+  ) +
+  annotate("text", x = as.Date("2022-09-28"), y = 70, label = "Hurricane\nIan (Sep '22)", size = 3.0, color = "#a4161a", hjust = 1.08) +
+  annotate("text", x = as.Date("2023-08-30"), y = 70, label = "Hurricane\nIdalia (Aug '23)", size = 3.0, color = "#a4161a", hjust = 1.08) +
+  annotate("text", x = as.Date("2024-10-09"), y = 70, label = "Helene & Milton\n(Sep–Oct '24)", size = 3.0, color = "#a4161a", hjust = 1.08) +
+  geom_col(
+    aes(y = suncoast, fill = "Greater Suncoast Estuaries (n = 887)"),
+    width = 70,
+    alpha = 0.82
+  ) +
+  geom_line(
+    aes(y = sarasota * 2.5, color = "Sarasota Bay Study Area (scaled 2.5×, n = 207)"),
+    linewidth = 1.2
+  ) +
+  geom_point(
+    aes(y = sarasota * 2.5, color = "Sarasota Bay Study Area (scaled 2.5×, n = 207)"),
+    size = 2.6
+  ) +
+  scale_y_continuous(
+    limits = c(0, 76),
+    name = "Quarterly Sightings — Greater Suncoast",
+    sec.axis = sec_axis(~ . / 2.5, name = "Quarterly Sightings — Sarasota Bay")
+  ) +
+  scale_fill_manual(values = c("Greater Suncoast Estuaries (n = 887)" = "#8ecae6"), name = NULL) +
+  scale_color_manual(values = c("Sarasota Bay Study Area (scaled 2.5×, n = 207)" = "#0b2545"), name = NULL) +
+  labs(
+    title = "Quarterly Dolphin Sightings Along Florida's Central Gulf Coast (2021–2026)",
+    subtitle = "Sightings dip sharply during major hurricane quarters (dashed lines) and rebound the following winter–spring",
+    x = "Quarter (Jan 2021 – Nov 2026)",
+    caption = "Source: GBIF Verified Visual Occurrences (Jan 1, 2021 – Nov 13, 2026)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 13.5),
+    legend.position = "top"
+  )
+```
+
+Crucially, rising annual sighting totals from 2021 to 2026 **do not prove that Sarasota Bay's dolphin population grew**. Instead, upward long-term trends in GBIF/iNaturalist records primarily reflect expanding smartphone wildlife photography and increased post-2021 outdoor recreation. Meanwhile, the sharp autumn dips—especially **Q3–Q4 2024**, when **Hurricanes Debby, Helene, and Milton** made back-to-back impacts along Sarasota Bay, damaging marinas, piers, and barrier islands—illustrate how severe weather temporarily halts coastal observation effort.
+
+Long-term demographic studies provide the true biological baseline behind these fluctuations. [Wells et al. (2025)](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full) report a mean annual birth rate of **0.071** balanced against a mean annual maximum loss rate of **0.072**, showing that Sarasota Bay's resident community remains remarkably stable from year to year—and historically stays inside its home range even through major hurricanes, while elevated loss episodes typically trace to severe **Karenia brevis** red-tide blooms and prey depletion rather than wind events alone.

@@ -1,0 +1,119 @@
+---
+title: "Dolphin Groups & Population Structure"
+subtitle: "Exploring pod-size distributions (2021–2026) and Sarasota Bay resident life-history benchmarks"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(plotly)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE) |>
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter (Dec–Feb)",
+      month %in% c(3, 4, 5)  ~ "Spring (Mar–May)",
+      month %in% c(6, 7, 8)  ~ "Summer (Jun–Aug)",
+      TRUE                   ~ "Autumn (Sep–Nov)"
+    ) |>
+      factor(levels = c(
+        "Winter (Dec–Feb)",
+        "Spring (Mar–May)",
+        "Summer (Jun–Aug)",
+        "Autumn (Sep–Nov)"
+      ))
+  )
+
+counted_pods <- dolphins |> filter(!is.na(group_size))
+```
+
+### Sightings vs. Unique Individual Dolphins
+
+A crucial distinction in marine mammal science separates **sighting events** from **unique individuals**:
+
+- **2,206 visual sightings (2021–2026)** represent distinct encounter events—the same resident dolphin in Sarasota Bay can be photographed dozens of times across seasons.
+- Within those 2,206 sightings, **259 records** explicitly counted total group size (`individualCount`), summing to **`r scales::comma(sum(counted_pods$group_size))` individual dolphin observations**, with a **median pod of `r median(counted_pods$group_size)` dolphins** and a **mean of `r round(mean(counted_pods$group_size), 2)` dolphins** (ranging from solitary foragers up to **44** dolphins). The remaining **1,947 records** verified presence without recording a full headcount and are left as `NA` rather than assumed to be `1`.
+- Long-term dorsal-fin photo-identification by [Wells et al. (2025)](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full) tracks **482 uniquely cataloged resident Sarasota Bay dolphins** over five decades (~160–170 core residents alive in any single year).
+
+### Pod-Size Frequency Distribution (259 Explicitly Counted Sightings)
+
+```{r}
+pod_bins <- counted_pods |>
+  mutate(
+    size_bin = case_when(
+      group_size == 1             ~ "1 (Solitary)",
+      group_size %in% 2:3         ~ "2–3 (Pair / Trio)",
+      group_size %in% 4:6         ~ "4–6 (Small Pod)",
+      group_size %in% 7:12        ~ "7–12 (Nursery / Social Pod)",
+      TRUE                        ~ "13–44 (Large Aggregation)"
+    ) |>
+      factor(levels = c(
+        "1 (Solitary)",
+        "2–3 (Pair / Trio)",
+        "4–6 (Small Pod)",
+        "7–12 (Nursery / Social Pod)",
+        "13–44 (Large Aggregation)"
+      ))
+  ) |>
+  count(region, size_bin)
+
+plot_ly(
+  data = pod_bins,
+  x = ~size_bin,
+  y = ~n,
+  color = ~region,
+  colors = c("#2a9d8f", "#137c8b", "#e63946", "#0b2545"),
+  type = "bar",
+  hovertemplate = "<b>%{fullData.name}</b><br>Pod Category: %{x}<br>Sightings: %{y}<extra></extra>"
+) |>
+  layout(
+    title = "Frequency of Dolphin Group Sizes by Coastal Zone (2021–2026)",
+    xaxis = list(title = "Observed Pod Size"),
+    yaxis = list(title = "Number of Counted Sightings"),
+    barmode = "stack",
+    legend = list(orientation = "h", y = -0.25)
+  )
+```
+
+### Seasonal Changes in Recorded Pod Size
+
+Hover over the seasonal boxplots below to inspect median, quartiles, and large-pod outliers across the four seasons.
+
+```{r}
+plot_ly(
+  data = counted_pods,
+  x = ~season,
+  y = ~group_size,
+  color = ~season,
+  colors = c("#0b2545", "#2a9d8f", "#e76f51", "#f4a261"),
+  type = "box",
+  boxpoints = "all",
+  jitter = 0.35,
+  pointpos = 0,
+  text = ~paste0("Date: ", event_date, "<br>Zone: ", region, "<br>Pod Size: ", group_size),
+  hoverinfo = "text+y"
+) |>
+  layout(
+    title = "Distribution of Observed Pod Sizes Across Seasons (2021–2026, n = 259)",
+    xaxis = list(title = "Season"),
+    yaxis = list(title = "Dolphins per Sighting"),
+    showlegend = FALSE
+  )
+```
+
+### Sarasota Bay Resident Life-History Benchmarks (Wells et al., 2025)
+
+Because opportunistic GBIF sightings rarely distinguish calves from adults consistently, peer-reviewed demographic parameters from **482 known Sarasota Bay residents** ([Wells et al., 2025](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full)) provide essential biological context for interpreting pod structure:
+
+| Demographic Parameter | Sarasota Bay Resident Value | Biological Meaning for Pod Structure |
+|---|---|---|
+| **Maximum Observed Lifespan** | **67 yrs** (Females) / **52 yrs** (Males) | Multi-generational maternal bands persist for decades |
+| **Age at First Reproduction** | **9.6 yrs** (Females; maturation at 8.5 yrs) | Young females remain near natal home ranges |
+| **Peak Calving Window** | **81% of births in May–July** | Drives warm-season mother–calf nursery pods |
+| **Mean Calving Interval** | **3.5 years** (up to 12 calves/female) | Calves stay closely bonded with mothers for 3–6 years |
+| **First-Year Recruitment Rate** | **0.050** (annual birth rate **0.071**) | Slow life history makes calf protection critical |
+| **Annual Immigration Rate** | **0.003 – 0.013** | Nearly closed resident community inside Sarasota Bay |

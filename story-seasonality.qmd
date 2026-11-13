@@ -1,0 +1,93 @@
+---
+title: "When Are Dolphins Most Present in Sarasota Bay?"
+subtitle: "Why visual sightings drop every late summer even though Sarasota Bay's dolphins never leave"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE)
+
+monthly_comp <- bind_rows(
+  dolphins |>
+    filter(region == "Sarasota Bay Study Area") |>
+    count(month) |>
+    mutate(
+      scope = "Sarasota Bay Study Area (n = 207)",
+      pct_of_annual = n / sum(n) * 100
+    ),
+  dolphins |>
+    count(month) |>
+    mutate(
+      scope = "All Florida Coasts (n = 2,206)",
+      pct_of_annual = n / sum(n) * 100
+    )
+) |>
+  mutate(month_abb = factor(month.abb[month], levels = month.abb))
+```
+
+Across six years of recent observations (2021–2026), recorded visual sightings in Sarasota Bay follow a sharp two-peak seasonal curve—and an equally striking late-summer trough. Sightings surge in **January (30)** and **March (34)** during Florida's dry winter–spring boating season, rebound in **June (21)** and **July (24)**, and then plummet by more than two-thirds during **August (8), September (7), and October (8)**. Plotting Sarasota Bay alongside all 2,206 statewide coastal sightings reveals the exact same rhythm across Florida: spring (March–April) accounts for over **28% of all annual sightings**, while August through November consistently marks the lowest recorded totals of the year.
+
+```{r}
+#| fig-width: 8.8
+#| fig-height: 5.2
+
+ggplot(monthly_comp, aes(x = month, y = pct_of_annual, color = scope, group = scope)) +
+  annotate(
+    "rect",
+    xmin = 4.8, xmax = 7.2,
+    ymin = -Inf, ymax = Inf,
+    fill = "#2a9d8f", alpha = 0.13
+  ) +
+  annotate(
+    "rect",
+    xmin = 7.8, xmax = 10.2,
+    ymin = -Inf, ymax = Inf,
+    fill = "#e63946", alpha = 0.10
+  ) +
+  annotate(
+    "text",
+    x = 6.0, y = 16.4,
+    label = "Peak Calving Biology\n(81% of births: May–Jul)",
+    color = "#16695f", fontface = "bold", size = 3.4
+  ) +
+  annotate(
+    "text",
+    x = 9.0, y = 16.4,
+    label = "Peak Gulf Storm &\nHurricane Trough (Aug–Oct)",
+    color = "#a4161a", fontface = "bold", size = 3.4
+  ) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_x_continuous(breaks = 1:12, labels = month.abb) +
+  scale_y_continuous(limits = c(0, 18), labels = \(x) paste0(x, "%")) +
+  scale_color_manual(
+    values = c(
+      "Sarasota Bay Study Area (n = 207)" = "#e63946",
+      "All Florida Coasts (n = 2,206)"    = "#0b2545"
+    ),
+    name = NULL
+  ) +
+  labs(
+    title = "Share of Annual Visual Dolphin Sightings by Month (Jan 2021 – Nov 2026)",
+    subtitle = "Visual sightings peak during spring boating months and drop sharply during late-summer storm season",
+    x = "Month of Year",
+    y = "Share of Total Sightings (%)",
+    caption = "Data: GBIF Verified Occurrences (2021–2026) | Calving window: Wells et al. (2025), Frontiers in Marine Science"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "top"
+  )
+```
+
+If we interpreted raw sighting counts literally, we might conclude that bottlenose dolphins migrate out of Sarasota Bay every August. Five decades of systematic photo-identification and tagging by the Sarasota Dolphin Research Program prove the exact opposite. In their landmark analysis of 482 resident Sarasota Bay dolphins, [Wells et al. (2025)](https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full) demonstrate that Sarasota Bay supports a year-round resident community with virtually zero seasonal turnover (annual immigration of just **0.003–0.013**). Even more remarkably, **81% of Sarasota Bay dolphin births occur between May and July**, meaning mothers and newborn calves are *most* concentrated in warm, shallow bay nursery meadows during late summer and early autumn.
+
+Why, then, do 2021–2026 visual records drop every August–October? Because opportunistic visual databases measure **when people are on the water**, not just when dolphins are present. March coincides with peak tourism and calm dry-season seas, whereas August through October brings extreme Gulf heat, daily afternoon lightning storms, red-tide blooms, and peak tropical cyclone activity—driving boaters and shoreline photographers indoors while resident dolphins remain below the surface. Passive underwater hydrophones in the Sarasota Bay Listening Network record continuous dolphin whistle activity right through those stormy late-summer months, underscoring why visual effort must always be separated from biological presence.

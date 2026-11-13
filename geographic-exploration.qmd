@@ -1,0 +1,171 @@
+---
+title: "Geographic Distribution Explorer (2021–2026)"
+subtitle: "Filter sightings by year, month, and coastal zone—and toggle spatial observation hotspots across Sarasota Bay"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(leaflet)
+library(crosstalk)
+
+dolphins <- read_csv("data/florida_dolphins_2021_2026.csv") |>
+  distinct(gbif_id, .keep_all = TRUE) |>
+  mutate(
+    month_name = factor(month.name[month], levels = month.name),
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% c(3, 4, 5)  ~ "Spring",
+      month %in% c(6, 7, 8)  ~ "Summer",
+      TRUE                   ~ "Autumn"
+    ),
+    pod_text = if_else(is.na(group_size), "Presence verified (count not recorded)", paste0(group_size, " dolphin(s)")),
+    popup_html = paste0(
+      "<b>Visual Sighting</b><br>",
+      "<b>Date:</b> ", event_date,
+      if_else(!is.na(event_time) & event_time != "", paste0(" at ", substr(event_time, 1, 5)), ""), "<br>",
+      "<b>Zone:</b> ", region, "<br>",
+      "<b>Pod Size:</b> ", pod_text, "<br>",
+      "<b>Coordinates:</b> ", round(lat, 4), "°N, ", abs(round(lon, 4)), "°W<br>",
+      "<b>Dataset:</b> ", source
+    )
+  )
+
+# Compute 0.03-degree (~3 km) spatial frequency grid around Greater Sarasota Bay for the interactive heatmap layer
+grid_step <- 0.03
+heat_grid <- dolphins |>
+  filter(lat >= 26.75, lat <= 27.65, lon >= -82.90, lon <= -82.25) |>
+  mutate(
+    lat_bin = floor(lat / grid_step) * grid_step,
+    lon_bin = floor(lon / grid_step) * grid_step
+  ) |>
+  summarize(sightings = n(), .by = c(lat_bin, lon_bin))
+
+heat_pal <- colorNumeric(
+  palette = c("#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"),
+  domain = heat_grid$sightings
+)
+
+# Publicly documented Sarasota Bay Listening Network (SBLN) reference station areas
+# (Station locations only; raw acoustic detection CSVs require SDRP permission)
+sbln_ref <- tibble(
+  station = c(
+    "Palma Sola Bay (SBLN Reference)",
+    "Cortez / Anna Maria Sound (SBLN Reference)",
+    "New College Caples Pier (SBLN Reference)",
+    "City Island / Mote Marine Lab (SBLN Reference)",
+    "Historic Spanish Point / Little Sarasota Bay (SBLN Reference)"
+  ),
+  lat = c(27.484, 27.468, 27.385, 27.334, 27.206),
+  lon = c(-82.658, -82.688, -82.563, -82.578, -82.497),
+  note = "Passive acoustic hydrophone area documented in SDRP / NCF research. Raw 2021–2026 whistle detection logs require formal SDRP data-sharing permission."
+)
+
+shared_geo <- SharedData$new(dolphins)
+
+season_pal <- colorFactor(
+  palette = c("Winter" = "#0b2545", "Spring" = "#2a9d8f", "Summer" = "#e76f51", "Autumn" = "#f4a261"),
+  levels = c("Winter", "Spring", "Summer", "Autumn")
+)
+```
+
+Use the filters below to explore where bottlenose dolphins were spotted between **January 2021 and November 2026**. The map opens zoomed into **Sarasota Bay**, with layer toggles on the top right so you can switch on the **Observation Frequency Heatmap** (~3 km grid cells) or inspect **SBLN Reference Hydrophone Locations** alongside individual visual sightings.
+
+::: {.filter-box}
+```{r}
+filter_checkbox(
+  id = "geo_year",
+  label = "Year (2021–2026)",
+  sharedData = shared_geo,
+  group = ~year,
+  inline = TRUE
+)
+
+filter_select(
+  id = "geo_month",
+  label = "Month of Year",
+  sharedData = shared_geo,
+  group = ~month_name
+)
+
+filter_select(
+  id = "geo_region",
+  label = "Coastal Study Zone",
+  sharedData = shared_geo,
+  group = ~region
+)
+```
+:::
+
+```{r}
+leaflet(shared_geo, height = 560) |>
+  addProviderTiles(providers$CartoDB.Positron) |>
+  setView(lng = -82.58, lat = 27.34, zoom = 10) |>
+  # Spatial frequency heatmap grid over Greater Sarasota Bay
+  addRectangles(
+    data = heat_grid,
+    lng1 = ~lon_bin,
+    lat1 = ~lat_bin,
+    lng2 = ~(lon_bin + grid_step),
+    lat2 = ~(lat_bin + grid_step),
+    fillColor = ~heat_pal(sightings),
+    fillOpacity = 0.48,
+    color = "#ffffff",
+    weight = 0.5,
+    popup = ~paste0("<b>Grid Cell Frequency (2021–2026):</b> ", sightings, " visual sightings"),
+    group = "Sarasota Bay Frequency Heatmap"
+  ) |>
+  # Individual filterable visual sightings
+  addCircleMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    radius = 5.5,
+    color = ~season_pal(season),
+    stroke = TRUE,
+    weight = 1,
+    fillOpacity = 0.78,
+    popup = ~popup_html,
+    group = "Visual Sightings (Filterable)"
+  ) |>
+  # Documented SBLN reference listening station areas
+  addCircleMarkers(
+    data = sbln_ref,
+    lng = ~lon,
+    lat = ~lat,
+    radius = 7,
+    color = "#6a0dad",
+    fillColor = "#9d4edd",
+    stroke = TRUE,
+    weight = 2,
+    fillOpacity = 0.9,
+    popup = ~paste0("<b>", station, "</b><br>", note),
+    group = "SBLN Hydrophone Stations (Ref Only)"
+  ) |>
+  addLayersControl(
+    overlayGroups = c(
+      "Visual Sightings (Filterable)",
+      "Sarasota Bay Frequency Heatmap",
+      "SBLN Hydrophone Stations (Ref Only)"
+    ),
+    options = layersControlOptions(collapsed = FALSE)
+  ) |>
+  addLegend(
+    position = "bottomleft",
+    pal = season_pal,
+    values = ~season,
+    title = "Visual Sighting Season",
+    opacity = 0.9
+  ) |>
+  addLegend(
+    position = "bottomright",
+    pal = heat_pal,
+    values = heat_grid$sightings,
+    title = "Grid Sightings",
+    opacity = 0.8
+  )
+```
+
+> **Interpreting geographic concentrations:** High cell counts near **Big Sarasota Pass**, **New Pass**, **City Island**, **Anna Maria Sound**, and **Venice Inlet** reflect both prime tidal foraging bottlenecks *and* easy shoreline/boater access where observers frequently photograph dolphins.
