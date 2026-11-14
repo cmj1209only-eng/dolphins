@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cmj1209only-eng.github.io/dolphins/summer-nurseries.html</loc>
-    <lastmod>2026-11-13T15:10:22.972Z</lastmod>
+    <loc>https://cmj1209only-eng.github.io/dolphins/dolphin-groups.html</loc>
+    <lastmod>2026-11-13T15:42:16.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/story-hotspots.html</loc>
+    <lastmod>2026-11-13T15:51:33.591Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/monthly-patterns.html</loc>
+    <lastmod>2026-11-13T15:40:46.448Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/story-seasonality.html</loc>
+    <lastmod>2026-11-13T15:51:33.558Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/story-trends.html</loc>
+    <lastmod>2026-11-13T15:51:33.611Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/activity-analysis.html</loc>
+    <lastmod>2026-11-13T15:42:16.078Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/data-methods.html</loc>
+    <lastmod>2026-11-13T15:51:33.635Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cmj1209only-eng.github.io/dolphins/geographic-exploration.html</loc>
+    <lastmod>2026-11-13T15:40:46.435Z</lastmod>
   </url>
   <url>
     <loc>https://cmj1209only-eng.github.io/dolphins/index.html</loc>
-    <lastmod>2026-11-13T15:10:22.972Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cmj1209only-eng.github.io/dolphins/seasonal-explorer.html</loc>
-    <lastmod>2026-11-13T15:10:22.972Z</lastmod>
+    <lastmod>2026-11-13T15:37:51.413Z</lastmod>
   </url>
 </urlset>

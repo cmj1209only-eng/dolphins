@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Why Dolphin Pods Swell Every Late Summer – Bottlenose Dolphins of Sarasota Bay</title>
+<title>Scientific Context, Data Sources &amp; Methodology – Sarasota Bay Dolphin Research Explorer (2021–2026)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -75,6 +75,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Bottlenose Dolphins of Sarasota Bay</span>
+    <span class="navbar-title">Sarasota Bay Dolphin Research Explorer (2021–2026)</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -98,13 +99,51 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./seasonal-explorer.html"> 
-<span class="menu-text">Monthly Sightings Explorer</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explorations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explorations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explorations">    
+        <li>
+    <a class="dropdown-item" href="./geographic-exploration.html">
+ <span class="dropdown-text">Geographic Distribution</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./monthly-patterns.html">
+ <span class="dropdown-text">Monthly &amp; Seasonal Patterns</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./activity-analysis.html">
+ <span class="dropdown-text">Time-of-Day Activity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dolphin-groups.html">
+ <span class="dropdown-text">Dolphin Groups &amp; Population</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stories" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Stories</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stories">    
+        <li>
+    <a class="dropdown-item" href="./story-seasonality.html">
+ <span class="dropdown-text">When Are Dolphins Most Present?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./story-hotspots.html">
+ <span class="dropdown-text">Where Do Sightings Concentrate?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./story-trends.html">
+ <span class="dropdown-text">How Presence Changed (2021–2026)</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./summer-nurseries.html" aria-current="page"> 
-<span class="menu-text">Summer Nurseries &amp; Life History</span></a>
+    <a class="nav-link active" href="./data-methods.html" aria-current="page"> 
+<span class="menu-text">Data &amp; Methods</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -117,16 +156,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#scientific-context-sarasota-bays-resident-dolphins" id="toc-scientific-context-sarasota-bays-resident-dolphins" class="nav-link active" data-scroll-target="#scientific-context-sarasota-bays-resident-dolphins">1. Scientific Context: Sarasota Bay’s Resident Dolphins</a></li>
+  <li><a href="#data-sources-verification-audit-january-2021-december-2026" id="toc-data-sources-verification-audit-january-2021-december-2026" class="nav-link" data-scroll-target="#data-sources-verification-audit-january-2021-december-2026">2. Data Sources &amp; Verification Audit (January 2021 – December 2026)</a></li>
+  <li><a href="#geographic-boundaries-cleaning-missing-data" id="toc-geographic-boundaries-cleaning-missing-data" class="nav-link" data-scroll-target="#geographic-boundaries-cleaning-missing-data">3. Geographic Boundaries, Cleaning &amp; Missing Data</a></li>
+  <li><a href="#methodological-limitations-biases" id="toc-methodological-limitations-biases" class="nav-link" data-scroll-target="#methodological-limitations-biases">4. Methodological Limitations &amp; Biases</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Dolphin Pods Swell Every Late Summer</h1>
-<p class="subtitle lead">Connecting 6,391 boat sightings to 50+ years of Sarasota Bay life-history research</p>
+<h1 class="title">Scientific Context, Data Sources &amp; Methodology</h1>
+<p class="subtitle lead">Research background, verified 2021–2026 dataset documentation, and methodological limitations</p>
 </div>
 
 
@@ -143,20 +191,94 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>When you browse Sarasota Bay’s dolphin sightings month by month, a striking seasonal rhythm emerges: groups are smallest in late winter and steadily grow all summer long. Across all 6,391 surveys conducted by the Sarasota Dolphin Research Program between 1971 and 2009, the average pod holds <strong>3.84 dolphins in February</strong>, climbs through late spring and summer, and peaks at <strong>6.02 dolphins in September</strong>—a <strong>57% increase</strong> in group size. By September and October, more than <strong>28% of all sightings</strong> involve large social groups of seven or more dolphins, nearly double February’s rate (15.6%).</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="summer-nurseries_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="816"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>At first glance, you might guess that outsiders swim into Sarasota Bay from the open Gulf each summer. Yet five decades of photo-identification and demographic tracking by <a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full">Wells et al.&nbsp;(2025)</a> rule that out: Sarasota Bay hosts a tightly knit resident community in which outside immigration is near zero (an annual rate of just <strong>0.003 to 0.013</strong>). Instead, the late-summer surge comes from inside the community itself. Analyzing 482 resident dolphins, Wells and colleagues show that reproduction is sharply seasonal, with <strong>81% of all births occurring between May and July</strong>.</p>
-<p>Those newborn calves reshape how dolphins group together across the bay. Resident females—who can live up to <strong>67 years</strong>, begin reproducing around age <strong>9.6</strong>, and nurse each calf over an average <strong>3.5-year calving interval</strong>—gather in warm, shallow seagrass meadows during summer and early autumn to form multi-mother nursery pods. Larger pods provide extra eyes against bull sharks, abundant summer prey, and social learning for calves during their most vulnerable first months of life, before groups disperse back into smaller foraging pairs and trios over the cooler winter months.</p>
+<section id="scientific-context-sarasota-bays-resident-dolphins" class="level2">
+<h2 class="anchored" data-anchor-id="scientific-context-sarasota-bays-resident-dolphins">1. Scientific Context: Sarasota Bay’s Resident Dolphins</h2>
+<p>Sarasota Bay is a shallow, 56-mile coastal lagoon system along Florida’s central Gulf Coast, sheltered by barrier islands (Anna Maria Island, Longboat Key, Lido Key, Siesta Key, and Casey Key) and carpeted with seagrass meadows, mangrove fringes, oyster bars, and tidal passes. Since <strong>1970</strong>, the <strong><a href="https://sarasotadolphin.org/">Sarasota Dolphin Research Program (SDRP)</a></strong>—a partnership of Brookfield Zoo Chicago and Mote Marine Laboratory—has maintained the world’s longest-running study of a wild cetacean community.</p>
+<ul>
+<li><strong>Dorsal-Fin Photo-Identification &amp; FinBase:</strong> Every adult bottlenose dolphin (<em>Tursiops truncatus</em>) acquires distinctive nicks and notches along the trailing edge of its dorsal fin. SDRP conducts monthly boat-based photo-ID surveys and catalogs individual life histories in <strong>FinBase</strong>, tracking five generations of multi-decade residents.</li>
+<li><strong>Demographic &amp; Life-History Findings (<a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full">Wells et al., 2025</a>):</strong> Across <strong>482 resident individuals</strong>, females live up to <strong>67 years</strong> (males <strong>52 years</strong>), give birth mainly in <strong>May–July (81% of births)</strong> at an average <strong>3.5-year interval</strong>, and show near-zero immigration (<strong>0.003–0.013/year</strong>).</li>
+<li><strong>Acoustic Monitoring &amp; Signature Whistles (<a href="https://sarasotadolphin.org/sbln-website/">SBLN</a>):</strong> Because murky estuarine water and nighttime darkness limit visual sightings, SDRP and collaborators operate the <strong>Sarasota Bay Listening Network (SBLN / PALS Network)</strong>—shore-based underwater hydrophones that continuously detect echolocation clicks and individualized <strong>signature whistles</strong> used by mothers and calves to maintain contact.</li>
+<li><strong>Environmental &amp; Human Pressures:</strong> Peer-reviewed SDRP research identifies <em>Karenia brevis</em> harmful algal blooms (red tide), recreational boat strikes, fishing-gear entanglement/ingestion, and seagrass habitat loss as the primary threats affecting resident survival.</li>
+</ul>
+<hr>
+</section>
+<section id="data-sources-verification-audit-january-2021-december-2026" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources-verification-audit-january-2021-december-2026">2. Data Sources &amp; Verification Audit (January 2021 – December 2026)</h2>
+<p>All data downloaded and verified on <strong>November 13, 2026</strong>. No synthetic, simulated, or pre-2021 observations are included anywhere on this website.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source / Repository</th>
+<th>URL</th>
+<th>2021–2026 Access Status</th>
+<th style="text-align: right;">Verified Observation Count</th>
+<th>Role in Project</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GBIF Occurrence API (<em>Tursiops truncatus</em>, Florida)</strong></td>
+<td><a href="https://www.gbif.org/occurrence/search?taxon_key=2440483&amp;year=2021,2026">gbif.org</a></td>
+<td><strong>Publicly Downloadable</strong></td>
+<td style="text-align: right;"><strong>2,206</strong> unique sightings (<code>207</code> inside Sarasota Bay box; <code>680</code> in Tampa Bay &amp; Charlotte Harbor)</td>
+<td>Primary 2021–2026 visual sighting dataset (<code>data/florida_dolphins_2021_2026.csv</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>Wells et al.&nbsp;(2025), <em>Frontiers in Marine Science</em></strong></td>
+<td><a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full">doi:10.3389/fmars.2025.1531528</a></td>
+<td><strong>Open-Access Peer-Reviewed Study</strong></td>
+<td style="text-align: right;"><strong>482</strong> resident life histories (50+ yr synthesis)</td>
+<td>Demographic, calving, lifespan, and residency benchmarks</td>
+</tr>
+<tr class="odd">
+<td><strong>SDRP FinBase (2010–2026 Boat Surveys)</strong></td>
+<td><a href="https://sarasotadolphin.org/">sarasotadolphin.org</a></td>
+<td><strong>Permission Required</strong> (Public OBIS/GBIF export <code>bb7c6f27-...</code> / <code>6cc99ecb-...</code> ends in 2009)</td>
+<td style="text-align: right;"><em>Restricted post-2009</em></td>
+<td>Documented; pre-2021 records excluded per 2021–2026 scope</td>
+</tr>
+<tr class="even">
+<td><strong>Sarasota Bay Listening Network (SBLN / PALS)</strong></td>
+<td><a href="https://sarasotadolphin.org/sbln-website/">sarasotadolphin.org/sbln-website</a></td>
+<td><strong>Permission Required</strong> (Raw CNN whistle CSVs not hosted for public bulk download)</td>
+<td style="text-align: right;"><em>0 public CSV rows</em></td>
+<td>5 published station locations mapped as reference markers only</td>
+</tr>
+<tr class="odd">
+<td><strong>Sarasota County Water Atlas (USF)</strong></td>
+<td><a href="https://sarasota.wateratlas.usf.edu/">sarasota.wateratlas.usf.edu</a></td>
+<td><strong>Public</strong> (Water quality / physical metrics only)</td>
+<td style="text-align: right;"><em>0 dolphin sighting rows</em></td>
+<td>Audited during Requirement 1 verification</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="geographic-boundaries-cleaning-missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="geographic-boundaries-cleaning-missing-data">3. Geographic Boundaries, Cleaning &amp; Missing Data</h2>
+<ul>
+<li><strong>Study Boundaries:</strong> Because Sarasota Bay alone contains <code>207</code> public visual sightings for 2021–2026, the dataset encompasses <strong>Florida coastal waters (<code>24.4°N–31.0°N, 87.6°W–79.8°W</code>; n = 2,206)</strong> while explicitly isolating the <strong>Sarasota Bay Study Area (<code>26.85°N–27.56°N, 82.85°W–82.30°W</code>; n = 207)</strong>—matching SDRP’s Anna Maria Sound to Venice/Lemon Bay corridor—and adjacent <strong>Tampa Bay &amp; Charlotte Harbor (<code>26.40°N–28.20°N, 83.20°W–82.00°W</code>; n = 680)</strong>.</li>
+<li><strong>Deduplication:</strong> Records were deduplicated on unique <code>gbif_id</code> (<code>2,206</code> unique occurrences across <code>1,110</code> distinct calendar dates).</li>
+<li><strong>Documented Missing Values (Never Imputed):</strong>
+<ul>
+<li><strong>December 2026:</strong> Marked <code>Unavailable (NA)</code> across all 72-month charts because data were retrieved on <strong>November 13, 2026</strong>.</li>
+<li><strong>Clock Timestamps:</strong> Present in <strong>2,101 of 2,206 records (95.2%)</strong>; the <code>105</code> date-only records are excluded from hourly analyses rather than assigned a default hour.</li>
+<li><strong>Pod Size (<code>group_size</code>):</strong> Explicitly reported in <strong>259 of 2,206 records (11.7%)</strong>; the remaining <code>1,947</code> presence-only records are stored as <code>NA</code> rather than assumed to be <code>1</code>.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="methodological-limitations-biases" class="level2">
+<h2 class="anchored" data-anchor-id="methodological-limitations-biases">4. Methodological Limitations &amp; Biases</h2>
+<ol type="1">
+<li><strong>Visual Effort Bias:</strong> Citizen-science sightings depend on fair weather, daylight, and shoreline/boater access. Lower counts at night, in mid-bay open water, or during August–October hurricane months reflect <strong>reduced human observation effort</strong>, not dolphin absence.</li>
+<li><strong>Acoustic vs.&nbsp;Visual Metrics:</strong> Acoustic hydrophone detections measure <strong>vocal activity rate</strong> within a station’s listening radius (~500–1,500 m)—a single whistling pod can trigger hundreds of detections per hour, whereas silent foraging dolphins go undetected acoustically. Visual sightings and acoustic detections therefore measure complementary dimensions of presence and are never merged into a single raw count.</li>
+<li><strong>Sightings vs.&nbsp;Abundance:</strong> Repeated sightings of long-lived resident dolphins over time cannot be summed to estimate population size without formal mark–recapture photo-identification modeling.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
