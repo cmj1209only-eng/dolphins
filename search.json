@@ -16,9 +16,9 @@
   {
     "objectID": "monthly-patterns.html",
     "href": "monthly-patterns.html",
-    "title": "Monthly & Seasonal Patterns (2021–2026)",
+    "title": "🍼 Year-by-Year Sightings & Calving Season (2021–2026)",
     "section": "",
-    "text": "Explore how verified visual sightings vary month by month from January 2021 through December 2026. Click any year in the legend to isolate or compare specific years. (December 2026 is explicitly marked NA because the dataset was retrieved on November 13, 2026; acoustic detection totals are omitted because public SBLN CSV logs are restricted.)\n\nYear-over-Year Monthly Comparison — Sarasota Bay Study Area\n\n\n\n\n\n\n\n\n72-Month Heatmap Across All Six Years (Florida Coast & Sarasota Bay)\nHover over any cell in the 72-month calendar matrix below to see exact monthly totals, seasonal peaks (March–April and June–July), and late-summer troughs (August–October).\n\n\n\n\n\n\n\n\nMonthly Averages & Seasonal Peaks (2021–2026)"
+    "text": "🍼 Why is May–July highlighted? Over 81% of Sarasota Bay dolphin calves are born between May and July (Wells et al., 2025), when shallow seagrass waters are warm and rich in fish! Hover over any bar or dot below to explore each month.\n\n\n📊 1. Monthly Bar Graphs for Each Year (All Florida Sightings, 2021–2026)\nEach year has its own bar graph across all 12 months (Jan–Dec), with May–July Calving Season shaded and colored in bright coral-pink:\n\n\n\n\n\n\n\n\n\n🔵 2. Dot Plots for Each Year (Sarasota Bay Sightings, 2021–2026)\nHere every single dot is 1 real dolphin sighting inside Sarasota Bay (207 dots total across 2021–2026), stacked month by month with May–July Calving Season marked on every year’s graph:"
   },
   {
     "objectID": "story-seasonality.html",
@@ -79,15 +79,22 @@
   {
     "objectID": "geographic-exploration.html",
     "href": "geographic-exploration.html",
-    "title": "Geographic Distribution Explorer (2021–2026)",
+    "title": "🗺️ Interactive Dolphin Explorer (2021–2026)",
     "section": "",
-    "text": "Use the filters below to explore where bottlenose dolphins were spotted between January 2021 and November 2026. The map opens zoomed into Sarasota Bay, with layer toggles on the top right so you can switch on the Observation Frequency Heatmap (~3 km grid cells) or inspect SBLN Reference Hydrophone Locations alongside individual visual sightings.\n\n\n\n\nYear (2021–2026)\n\n\n\n2021\n\n\n\n2022\n\n\n\n2023\n\n\n\n2024\n\n\n\n2025\n\n\n\n2026\n\n\n\n\n\n\n\nMonth of Year\n\n\n\n\n\n\n\n\nCoastal Study Zone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpreting geographic concentrations: High cell counts near Big Sarasota Pass, New Pass, City Island, Anna Maria Sound, and Venice Inlet reflect both prime tidal foraging bottlenecks and easy shoreline/boater access where observers frequently photograph dolphins."
+    "text": "🎛️ Live Controls — Every filter updates the map, the monthly chart, and the table below at the same time!\n\n\n\n\n\n\n1️⃣ Pick Year(s)\n\n\n\n2021\n\n\n\n2022\n\n\n\n2023\n\n\n\n2024\n\n\n\n2025\n\n\n\n2026\n\n\n\n\n\n\n\n2️⃣ Pick Season(s)\n\n\n\nWinter\n\n\n\nSpring\n\n\n\nSummer\n\n\n\nAutumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n3️⃣ Coastal Zone\n\n\n\n\n\n\n\n\n4️⃣ Specific Month\n\n\n\n\n\n\n\n\n5️⃣ Hour of Day (0 = Midnight, 12 = Noon)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n📊 Live Linked Breakdown & Searchable Log\n\n📈 Live Monthly Chart (Updates with Filters!)🔎 Search & Sort Individual Sightings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n💡 Try this: Switch the map (top-right box) to Satellite View, turn on Hotspot Heatmap, and zoom into Big Sarasota Pass or Anna Maria Sound—you can actually see the narrow sandy passes where dolphins hunt!"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Sarasota Bay & Florida Bottlenose Dolphin Presence (2021–2026)",
+    "title": "Florida & Sarasota Bay Bottlenose Dolphins",
     "section": "",
-    "text": "This research platform investigates common bottlenose dolphin (Tursiops truncatus) sightings and seasonal presence from January 2021 through December 2026, pairing 2,206 verified GBIF visual sightings across Florida’s coastline (207 inside the Sarasota Bay focal boundary and 680 in adjacent Tampa Bay & Charlotte Harbor) with 50+ years of demographic context from the Sarasota Dolphin Research Program (Wells et al., 2025).\n\n\n2,206Verified Visual Sightings (2021–2026)207Sightings Inside Sarasota Bay Box0 Public CSVsAcoustic Detections (SBLN Restricted*)1,110Unique Observation Days6 Years2021–2026 (Dec 2026 Pending)April (343)Most Frequently Observed Month\n\n\n*Note on observation types: All 2,206 plotted points are verified visual sightings. Raw hydrophone whistle logs from the Sarasota Bay Listening Network (SBLN) require institutional permission and are documented in Data & Methods rather than simulated.\n\nInteractive Dolphin Presence Map (2,206 Observations, 2021–2026)\nToggle individual years or coastal zones below, or zoom directly into the dashed red Sarasota Bay study box (26.85°N–27.56°N, Anna Maria Sound to Venice/Lemon Bay) to inspect waterway labels and individual sightings.\n\n\n\n\nSelect Survey Year(s) (2021–2026)\n\n\n\n2021\n\n\n\n2022\n\n\n\n2023\n\n\n\n2024\n\n\n\n2025\n\n\n\n2026\n\n\n\n\n\n\n\nFilter by Coastal Study Boundary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n72-Month Dolphin Sightings Timeline (January 2021 – December 2026)\nEvery month from January 2021 through November 2026 contains verified observations; December 2026 (future/not yet elapsed as of the November 13, 2026 data pull) is explicitly distinguished as unavailable rather than plotted as zero."
+    "text": "Explore 2,206 real bottlenose dolphin sightings recorded along Florida’s coast and inside Sarasota Bay from January 2021 through November 2026. Pick any topic below—each section has its own page!\nLaunch the Interactive Map →\n2,206Verified Florida Sightings (2021–2026)207Inside Sarasota Bay Study Area1,110Different Days Dolphins Were SpottedAprilPeak Sighting Month (343 Sightings)"
+  },
+  {
+    "objectID": "index.html#where-when-do-we-spot-wild-dolphins",
+    "href": "index.html#where-when-do-we-spot-wild-dolphins",
+    "title": "Florida & Sarasota Bay Bottlenose Dolphins",
+    "section": "",
+    "text": "Explore 2,206 real bottlenose dolphin sightings recorded along Florida’s coast and inside Sarasota Bay from January 2021 through November 2026. Pick any topic below—each section has its own page!\nLaunch the Interactive Map →"
   }
 ]
