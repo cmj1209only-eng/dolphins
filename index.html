@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Florida &amp; Sarasota Bay Bottlenose Dolphins – 🐬 Florida &amp; Sarasota Dolphins (2021–2026)</title>
+<title>🐬 Florida &amp; Sarasota Bay Bottlenose Dolphins – 🐬 Florida &amp; Sarasota Dolphins</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -73,6 +73,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -86,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">🐬 Florida &amp; Sarasota Dolphins (2021–2026)</span>
+    <span class="navbar-title">🐬 Florida &amp; Sarasota Dolphins</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,9 +136,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./story-trends.html"> 
 <span class="menu-text">Trends</span></a>
   </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./data-methods.html"> 
-<span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -148,8 +159,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Florida &amp; Sarasota Bay Bottlenose Dolphins</h1>
-<p class="subtitle lead">2021–2026 Interactive Sightings Explorer</p>
+<h1 class="title">🐬 Florida &amp; Sarasota Bay Bottlenose Dolphins</h1>
+<p class="subtitle lead">Exploring 2,206 Wild Dolphin Sightings Along Florida’s Coasts (2021–2026)</p>
 </div>
 
 
@@ -166,83 +177,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="where-when-do-we-spot-wild-dolphins" class="level2 hero-banner">
-<h2 class="anchored" data-anchor-id="where-when-do-we-spot-wild-dolphins">Where &amp; When Do We Spot Wild Dolphins? 🐬</h2>
-<p>Explore <strong>2,206 real bottlenose dolphin sightings</strong> recorded along Florida’s coast and inside <strong>Sarasota Bay</strong> from <strong>January 2021 through November 2026</strong>. Pick any topic below—each section has its own page!</p>
-<p><a href="./geographic-exploration.html" class="hero-btn">Launch the Interactive Map →</a></p>
+<div class="dolphin-swim-strip">
+<svg class="swim-dolphin d1" viewbox="0 0 120 60" aria-hidden="true">
+<path d="M12,38 C28,16 58,10 86,20 C97,24 106,30 114,32 C104,33 96,36 90,40 C94,46 92,52 84,50 C78,44 72,40 62,40 C46,40 30,45 16,52 C19,44 17,40 6,36 C12,35 14,36 12,38 Z M54,18 C58,6 68,4 70,15 Z" fill="#00b4d8"></path>
+</svg>
+<svg class="swim-dolphin d2" viewbox="0 0 120 60" aria-hidden="true">
+<path d="M12,38 C28,16 58,10 86,20 C97,24 106,30 114,32 C104,33 96,36 90,40 C94,46 92,52 84,50 C78,44 72,40 62,40 C46,40 30,45 16,52 C19,44 17,40 6,36 C12,35 14,36 12,38 Z M54,18 C58,6 68,4 70,15 Z" fill="#ff4d6d"></path>
+</svg>
+<svg class="swim-dolphin d3" viewbox="0 0 120 60" aria-hidden="true">
+<path d="M12,38 C28,16 58,10 86,20 C97,24 106,30 114,32 C104,33 96,36 90,40 C94,46 92,52 84,50 C78,44 72,40 62,40 C46,40 30,45 16,52 C19,44 17,40 6,36 C12,35 14,36 12,38 Z M54,18 C58,6 68,4 70,15 Z" fill="#ff9f1c"></path>
+</svg>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6a8a1cc5885e1625ecd3" style="width:100%;height:351px;"></div>
+<script type="application/json" data-for="htmlwidget-6a8a1cc5885e1625ecd3">{"x":{"data":[{"x":[4.5,4.5,7.5,7.5,4.5],"y":[0,335,335,0,0],"text":"","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(255,204,213,0.35)","hoveron":"fills","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6],"y":[318],"text":"🍼 Peak Calving Season<br />(81% of Sarasota births)","hovertext":"","textfont":{"size":12.850393700787402,"color":"rgba(201,24,74,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.7400000000000001,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.73999999999999932,0.73999999999999844,0.73999999999999844,0.73999999999999844,0.73999999999999844],"base":[141,179,248,327,147,167,199,113,131,111,108,128],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[30,16,34,16,14,21,24,8,7,8,11,18],"text":["<b>January (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>30<\/b> (17.5% of month)<br>All-Florida Month Total: <b>171<\/b>","<b>February (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>16<\/b> (8.2% of month)<br>All-Florida Month Total: <b>195<\/b>","<b>March (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>34<\/b> (12.1% of month)<br>All-Florida Month Total: <b>282<\/b>","<b>April (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>16<\/b> (4.7% of month)<br>All-Florida Month Total: <b>343<\/b>","<b>May (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>14<\/b> (8.7% of month)<br>All-Florida Month Total: <b>161<\/b>","<b>June (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>21<\/b> (11.2% of month)<br>All-Florida Month Total: <b>188<\/b>","<b>July (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>24<\/b> (10.8% of month)<br>All-Florida Month Total: <b>223<\/b>","<b>August (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>8<\/b> (6.6% of month)<br>All-Florida Month Total: <b>121<\/b>","<b>September (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>7<\/b> (5.1% of month)<br>All-Florida Month Total: <b>138<\/b>","<b>October (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>8<\/b> (6.7% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>November (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>11<\/b> (9.2% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>December (2021–2026)<\/b><br>Region: <b>Sarasota Bay Study Area<\/b><br>Sightings: <b>18<\/b> (12.3% of month)<br>All-Florida Month Total: <b>146<\/b>"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,77,109,0.95)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Sarasota Bay Study Area","legendgroup":"Sarasota Bay Study Area","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.7400000000000001,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.73999999999999932,0.73999999999999844,0.73999999999999844,0.73999999999999844,0.73999999999999844],"base":[73,112,146,244,105,114,155,72,88,71,59,80],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[68,67,102,83,42,53,44,41,43,40,49,48],"text":["<b>January (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>68<\/b> (39.8% of month)<br>All-Florida Month Total: <b>171<\/b>","<b>February (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>67<\/b> (34.4% of month)<br>All-Florida Month Total: <b>195<\/b>","<b>March (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>102<\/b> (36.2% of month)<br>All-Florida Month Total: <b>282<\/b>","<b>April (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>83<\/b> (24.2% of month)<br>All-Florida Month Total: <b>343<\/b>","<b>May (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>42<\/b> (26.1% of month)<br>All-Florida Month Total: <b>161<\/b>","<b>June (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>53<\/b> (28.2% of month)<br>All-Florida Month Total: <b>188<\/b>","<b>July (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>44<\/b> (19.7% of month)<br>All-Florida Month Total: <b>223<\/b>","<b>August (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>41<\/b> (33.9% of month)<br>All-Florida Month Total: <b>121<\/b>","<b>September (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>43<\/b> (31.2% of month)<br>All-Florida Month Total: <b>138<\/b>","<b>October (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>40<\/b> (33.6% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>November (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>49<\/b> (41.2% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>December (2021–2026)<\/b><br>Region: <b>Tampa Bay & Charlotte Harbor<\/b><br>Sightings: <b>48<\/b> (32.9% of month)<br>All-Florida Month Total: <b>146<\/b>"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,159,28,0.95)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Tampa Bay & Charlotte Harbor","legendgroup":"Tampa Bay & Charlotte Harbor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.7400000000000001,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.73999999999999932,0.73999999999999844,0.73999999999999844,0.73999999999999844,0.73999999999999844],"base":[7,20,15,32,37,9,22,14,28,15,10,25],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[66,92,131,212,68,105,133,58,60,56,49,55],"text":["<b>January (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>66<\/b> (38.6% of month)<br>All-Florida Month Total: <b>171<\/b>","<b>February (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>92<\/b> (47.2% of month)<br>All-Florida Month Total: <b>195<\/b>","<b>March (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>131<\/b> (46.5% of month)<br>All-Florida Month Total: <b>282<\/b>","<b>April (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>212<\/b> (61.8% of month)<br>All-Florida Month Total: <b>343<\/b>","<b>May (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>68<\/b> (42.2% of month)<br>All-Florida Month Total: <b>161<\/b>","<b>June (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>105<\/b> (55.9% of month)<br>All-Florida Month Total: <b>188<\/b>","<b>July (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>133<\/b> (59.6% of month)<br>All-Florida Month Total: <b>223<\/b>","<b>August (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>58<\/b> (47.9% of month)<br>All-Florida Month Total: <b>121<\/b>","<b>September (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>60<\/b> (43.5% of month)<br>All-Florida Month Total: <b>138<\/b>","<b>October (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>56<\/b> (47.1% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>November (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>49<\/b> (41.2% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>December (2021–2026)<\/b><br>Region: <b>Other Florida Gulf Coast<\/b><br>Sightings: <b>55<\/b> (37.7% of month)<br>All-Florida Month Total: <b>146<\/b>"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,180,216,0.95)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Other Florida Gulf Coast","legendgroup":"Other Florida Gulf Coast","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.7400000000000001,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.74000000000000021,0.73999999999999932,0.73999999999999844,0.73999999999999844,0.73999999999999844,0.73999999999999844],"base":[0,0,0,0,0,0,0,0,0,0,0,0],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[7,20,15,32,37,9,22,14,28,15,10,25],"text":["<b>January (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>7<\/b> (4.1% of month)<br>All-Florida Month Total: <b>171<\/b>","<b>February (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>20<\/b> (10.3% of month)<br>All-Florida Month Total: <b>195<\/b>","<b>March (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>15<\/b> (5.3% of month)<br>All-Florida Month Total: <b>282<\/b>","<b>April (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>32<\/b> (9.3% of month)<br>All-Florida Month Total: <b>343<\/b>","<b>May (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>37<\/b> (23% of month)<br>All-Florida Month Total: <b>161<\/b>","<b>June (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>9<\/b> (4.8% of month)<br>All-Florida Month Total: <b>188<\/b>","<b>July (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>22<\/b> (9.9% of month)<br>All-Florida Month Total: <b>223<\/b>","<b>August (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>14<\/b> (11.6% of month)<br>All-Florida Month Total: <b>121<\/b>","<b>September (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>28<\/b> (20.3% of month)<br>All-Florida Month Total: <b>138<\/b>","<b>October (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>15<\/b> (12.6% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>November (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>10<\/b> (8.4% of month)<br>All-Florida Month Total: <b>119<\/b>","<b>December (2021–2026)<\/b><br>Region: <b>Florida Atlantic Coast<\/b><br>Sightings: <b>25<\/b> (17.1% of month)<br>All-Florida Month Total: <b>146<\/b>"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(6,214,160,0.95)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Florida Atlantic Coast","legendgroup":"Florida Atlantic Coast","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[171,195,282,343,161,188,223,121,138,119,119,146],"text":"","type":"scatter","mode":"lines","line":{"width":4.1574803149606305,"color":"rgba(3,4,94,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[171,195,282,343,161,188,223,121,138,119,119,146],"text":["<b>January Total:<\/b> 171 sightings","<b>February Total:<\/b> 195 sightings","<b>March Total:<\/b> 282 sightings","<b>April Total:<\/b> 343 sightings","<b>May Total:<\/b> 161 sightings","<b>June Total:<\/b> 188 sightings","<b>July Total:<\/b> 223 sightings","<b>August Total:<\/b> 121 sightings","<b>September Total:<\/b> 138 sightings","<b>October Total:<\/b> 119 sightings","<b>November Total:<\/b> 119 sightings","<b>December Total:<\/b> 146 sightings"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(3,4,94,1)","opacity":1,"size":10.58267716535433,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(3,4,94,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.231216272312167,"r":8.634288086342881,"b":44.034869240348698,"l":50.942299709422997},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685766},"title":{"text":"<b> Florida's Seasonal Dolphin Wave: Monthly Sightings by Coastal Zone (2021–2026) <\/b>","font":{"color":"rgba(3,4,94,1)","family":"","size":18.596928185969286},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.043000000000000038,12.956999999999999],"tickmode":"array","ticktext":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"tickvals":[1,2,3,3.9999999999999996,5,6,6.9999999999999991,7.9999999999999991,9,10,11,12],"categoryorder":"array","categoryarray":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.3171440431714414,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.814860938148611},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.78493528057662576,"zeroline":false,"anchor":"y","title":{"text":"Month of the Year","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685766}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0,355.35000000000002],"tickmode":"array","ticktext":["0","100","200","300"],"tickvals":[0,99.999999999999986,199.99999999999997,300],"categoryorder":"array","categoryarray":["0","100","200","300"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.3171440431714405,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.814860938148611},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.78493528057662576,"zeroline":false,"anchor":"x","title":{"text":"Verified Dolphin Sightings","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685766}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.814860938148611},"orientation":"h","x":0.02,"y":1.1200000000000001,"xanchor":"center","yanchor":"bottom","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685766}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"29fe7b9a5f1e":{"xmin":{},"xmax":{},"ymin":{},"ymax":{},"type":"scatter"},"29fe317b3d08":{"x":{},"y":{}},"29fe6d7ff21a":{"x":{},"y":{},"fill":{},"text":{}},"29fe648b1d02":{"x":{},"y":{}},"29fe14081d58":{"x":{},"y":{},"text":{}}},"cur_data":"29fe7b9a5f1e","visdat":{"29fe7b9a5f1e":["function (y) ","x"],"29fe317b3d08":["function (y) ","x"],"29fe6d7ff21a":["function (y) ","x"],"29fe648b1d02":["function (y) ","x"],"29fe14081d58":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="what-this-graph-showsand-why-sightings-rise-and-fall" class="level3 graph-explanation">
+<h3 class="anchored" data-anchor-id="what-this-graph-showsand-why-sightings-rise-and-fall">🔍 What This Graph Shows—and Why Sightings Rise and Fall</h3>
+<p>This interactive chart combines <strong>2,206 verified wild bottlenose dolphin (<em>Tursiops truncatus</em>) sightings</strong> recorded along Florida’s coastlines from <strong>January 2021 through October 2026</strong> (hover over any color bar or click a coastal zone in the legend to isolate it!). At first glance, you might think Florida’s dolphins migrate away every late summer—sightings soar to <strong>343 in April</strong> during sunny dry-season weather, stay lively into <strong>May–July peak calving season</strong> (when over <strong>81% of Sarasota Bay dolphin calves are born</strong>), and then plunge by more than half in <strong>August–October</strong>.</p>
+<p>Here is the scientific twist: long-term dorsal-fin tracking shows that <strong>Sarasota Bay’s ~160–170 resident dolphins stay in their home bay all 12 months of the year!</strong> What actually changes across the calendar is <em>human observer effort</em>. Cool, calm winter and spring afternoons bring thousands of boaters, kayakers, and pier visitors out with cameras, whereas scorching late-summer heat, daily afternoon lightning storms, and major Gulf hurricanes push <em>people</em> indoors while dolphins keep hunting and whistling below the waves.</p>
 </section>
 <div class="cell">
 <div class="cell-output-display">
 <div class="stat-grid"><div class="stat-card ocean"><div class="stat-value">2,206</div><div class="stat-label">Verified Florida Sightings (2021–2026)</div></div><div class="stat-card coral"><div class="stat-value">207</div><div class="stat-label">Inside Sarasota Bay Study Area</div></div><div class="stat-card seafoam"><div class="stat-value">1,110</div><div class="stat-label">Different Days Dolphins Were Spotted</div></div><div class="stat-card sunset"><div class="stat-value">April</div><div class="stat-label">Peak Sighting Month (343 Sightings)</div></div></div>
 </div>
 </div>
-<section id="pick-a-section-to-explore" class="level3">
-<h3 class="anchored" data-anchor-id="pick-a-section-to-explore">Pick a Section to Explore</h3>
+<section id="dive-deeper-into-the-tabs-above" class="level3">
+<h3 class="anchored" data-anchor-id="dive-deeper-into-the-tabs-above">🌊 Dive Deeper Into the Tabs Above</h3>
 <div class="section-grid">
 <a class="section-card" style="border-top-color: #0077b6;" href="./geographic-exploration.html">
 <h3 class="anchored">
 🗺️ Interactive Map
 </h3>
 <p>
-Switch between Satellite &amp; Ocean views, slide through hours of the day, and filter sightings live.
+Switch between Land, Satellite &amp; Ocean views, slide through hours of the day, and filter sightings live.
 </p>
 </a><p><a class="section-card" style="border-top-color: #0077b6;" href="./geographic-exploration.html"></a></p>
-<a class="section-card" style="border-top-color: #06d6a0;" href="./monthly-patterns.html">
+<a class="section-card" style="border-top-color: #ff4d6d;" href="./monthly-patterns.html">
 <h3 class="anchored">
-🍼 Yearly Graphs &amp; Calving
+🍼 Yearly &amp; Calving
 </h3>
 <p>
-See separate 2021–2026 bar graphs and dot plots for every month, with May–July calving season marked!
+Compare 2021–2026 monthly bar graphs and unit dot plots with May–July calving season highlighted.
 </p>
-</a><p><a class="section-card" style="border-top-color: #06d6a0;" href="./monthly-patterns.html"></a></p>
+</a><p><a class="section-card" style="border-top-color: #ff4d6d;" href="./monthly-patterns.html"></a></p>
 <a class="section-card" style="border-top-color: #ff9f1c;" href="./activity-analysis.html">
 <h3 class="anchored">
 ☀️ Time of Day
 </h3>
 <p>
-See which hours of the morning and afternoon bring the most dolphin sightings.
+See which hours of the morning and afternoon bring the most dolphin encounters in every season.
 </p>
 </a><p><a class="section-card" style="border-top-color: #ff9f1c;" href="./activity-analysis.html"></a></p>
-<a class="section-card" style="border-top-color: #ff6b6b;" href="./dolphin-groups.html">
+<a class="section-card" style="border-top-color: #06d6a0;" href="./dolphin-groups.html">
 <h3 class="anchored">
 🐬 Pod Sizes
 </h3>
 <p>
-From solo foragers to 44-dolphin mega-pods—plus Sarasota Bay calf &amp; lifespan facts.
+From solo hunters to 44-dolphin mega-pods—plus Sarasota Bay calf and 67-year lifespan facts.
 </p>
-</a><p><a class="section-card" style="border-top-color: #ff6b6b;" href="./dolphin-groups.html"></a></p>
+</a><p><a class="section-card" style="border-top-color: #06d6a0;" href="./dolphin-groups.html"></a></p>
 <a class="section-card" style="border-top-color: #7209b7;" href="./story-seasonality.html">
 <h3 class="anchored">
-🌦️ Why Sightings Drop in Late Summer
+🌦️ Seasons
 </h3>
 <p>
-Dolphins stay all year—so why do sightings plunge every August–October?
+Why late-summer sightings plunge even though Sarasota Bay’s resident dolphins never leave.
 </p>
 </a><p><a class="section-card" style="border-top-color: #7209b7;" href="./story-seasonality.html"></a></p>
 <a class="section-card" style="border-top-color: #e63946;" href="./story-hotspots.html">
 <h3 class="anchored">
-📍 Sarasota Bay Hotspots
+📍 Hotspots
 </h3>
 <p>
-Discover the 5 narrow passes and bridges where sightings cluster year after year.
+Discover the 5 narrow tidal passes and bridges where Sarasota Bay sightings cluster year after year.
 </p>
 </a><p><a class="section-card" style="border-top-color: #e63946;" href="./story-hotspots.html"></a></p>
 <a class="section-card" style="border-top-color: #118ab2;" href="./story-trends.html">
 <h3 class="anchored">
-📈 2021–2026 Trends &amp; Hurricanes
+📈 Trends
 </h3>
 <p>
-How Hurricanes Ian, Idalia, Helene &amp; Milton shaped coastal sightings.
+How Hurricanes Ian, Idalia, Helene &amp; Milton shaped coastal sightings across 2021–2026.
 </p>
 </a><p><a class="section-card" style="border-top-color: #118ab2;" href="./story-trends.html"></a></p>
-<a class="section-card" style="border-top-color: #2ec4b6;" href="./data-methods.html">
-<h3 class="anchored">
-🔬 About the Data
-</h3>
-<p>
-Where our 2021–2026 data come from and how citizen sightings compare to photo-ID surveys.
-</p>
-</a><p><a class="section-card" style="border-top-color: #2ec4b6;" href="./data-methods.html"></a></p>
 </div>
 
 

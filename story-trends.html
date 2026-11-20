@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>How Has Recorded Dolphin Presence Changed From 2021–2026? – 🐬 Florida &amp; Sarasota Dolphins (2021–2026)</title>
+<title>📈 2021–2026 Trends &amp; Major Hurricanes – 🐬 Florida &amp; Sarasota Dolphins</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -73,6 +73,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -86,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">🐬 Florida &amp; Sarasota Dolphins (2021–2026)</span>
+    <span class="navbar-title">🐬 Florida &amp; Sarasota Dolphins</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,9 +136,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./story-trends.html" aria-current="page"> 
 <span class="menu-text">Trends</span></a>
   </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./data-methods.html"> 
-<span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -148,8 +159,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">How Has Recorded Dolphin Presence Changed From 2021–2026?</h1>
-<p class="subtitle lead">Tracking six years of observations across citizen-science growth and major Gulf hurricanes</p>
+<h1 class="title">📈 2021–2026 Trends &amp; Major Hurricanes</h1>
+<p class="subtitle lead">Six years of rising coastal sightings—and sharp dips during major Gulf storms</p>
 </div>
 
 
@@ -166,20 +177,32 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Between 2021 and 2026, annual verified dolphin sightings rose across both Sarasota Bay and the surrounding central Gulf Coast (<code>Greater Suncoast</code>, spanning Tampa Bay, Sarasota Bay, and Charlotte Harbor). Inside Sarasota Bay, annual sightings climbed from <strong>25 in 2021</strong> and <strong>32 in 2022</strong> to <strong>39 in 2023</strong>, dipped to <strong>32 in 2024</strong>, and rebounded to <strong>41 in 2025</strong> and <strong>38 through mid-November 2026</strong>. Across the broader Suncoast estuaries, sightings nearly doubled from <strong>98 in 2021</strong> to <strong>176 in 2025</strong> and <strong>179 in 2026</strong> (even before December 2026 has elapsed).</p>
+<div class="dolphin-swim-strip">
+<svg class="swim-dolphin d1" viewbox="0 0 120 60" aria-hidden="true">
+<path d="M12,38 C28,16 58,10 86,20 C97,24 106,30 114,32 C104,33 96,36 90,40 C94,46 92,52 84,50 C78,44 72,40 62,40 C46,40 30,45 16,52 C19,44 17,40 6,36 C12,35 14,36 12,38 Z M54,18 C58,6 68,4 70,15 Z" fill="#00b4d8"></path>
+</svg>
+<svg class="swim-dolphin d3" viewbox="0 0 120 60" aria-hidden="true">
+<path d="M12,38 C28,16 58,10 86,20 C97,24 106,30 114,32 C104,33 96,36 90,40 C94,46 92,52 84,50 C78,44 72,40 62,40 C46,40 30,45 16,52 C19,44 17,40 6,36 C12,35 14,36 12,38 Z M54,18 C58,6 68,4 70,15 Z" fill="#ff9f1c"></path>
+</svg>
+</div>
+<div class="takeaway-box">
+<p><strong>🌀 Storms vs.&nbsp;Survival:</strong> Notice how sightings dip right when major hurricanes hit (<strong>Ian in 2022</strong>, <strong>Idalia in 2023</strong>, <strong>Helene &amp; Milton in 2024</strong>)—then bounce right back the next spring! Resident Sarasota Bay dolphins stay put through hurricanes while damaged piers and marinas temporarily slow human sightings.</p>
+</div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="story-trends_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="844"></p>
-</figure>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-9bd159105171c973d2b4" style="width:100%;height:362px;"></div>
+<script type="application/json" data-for="htmlwidget-9bd159105171c973d2b4">{"x":{"data":[{"orientation":"v","width":[72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[18628,18718,18809,18901,18993,19083,19174,19266,19358,19448,19539,19631,19723,19814,19905,19997,20089,20179,20270,20362,20454,20544,20635,20727],"y":[28,15,20,35,47,32,26,22,61,31,33,35,57,40,22,28,51,50,30,45,73,61,36,9],"text":["<b>2021 Q1<\/b><br>Greater Suncoast: <b>28 sightings<\/b>","<b>2021 Q2<\/b><br>Greater Suncoast: <b>15 sightings<\/b>","<b>2021 Q3<\/b><br>Greater Suncoast: <b>20 sightings<\/b>","<b>2021 Q4<\/b><br>Greater Suncoast: <b>35 sightings<\/b>","<b>2022 Q1<\/b><br>Greater Suncoast: <b>47 sightings<\/b>","<b>2022 Q2<\/b><br>Greater Suncoast: <b>32 sightings<\/b>","<b>2022 Q3<\/b><br>Greater Suncoast: <b>26 sightings<\/b>","<b>2022 Q4<\/b><br>Greater Suncoast: <b>22 sightings<\/b>","<b>2023 Q1<\/b><br>Greater Suncoast: <b>61 sightings<\/b>","<b>2023 Q2<\/b><br>Greater Suncoast: <b>31 sightings<\/b>","<b>2023 Q3<\/b><br>Greater Suncoast: <b>33 sightings<\/b>","<b>2023 Q4<\/b><br>Greater Suncoast: <b>35 sightings<\/b>","<b>2024 Q1<\/b><br>Greater Suncoast: <b>57 sightings<\/b>","<b>2024 Q2<\/b><br>Greater Suncoast: <b>40 sightings<\/b>","<b>2024 Q3<\/b><br>Greater Suncoast: <b>22 sightings<\/b>","<b>2024 Q4<\/b><br>Greater Suncoast: <b>28 sightings<\/b>","<b>2025 Q1<\/b><br>Greater Suncoast: <b>51 sightings<\/b>","<b>2025 Q2<\/b><br>Greater Suncoast: <b>50 sightings<\/b>","<b>2025 Q3<\/b><br>Greater Suncoast: <b>30 sightings<\/b>","<b>2025 Q4<\/b><br>Greater Suncoast: <b>45 sightings<\/b>","<b>2026 Q1<\/b><br>Greater Suncoast: <b>73 sightings<\/b>","<b>2026 Q2<\/b><br>Greater Suncoast: <b>61 sightings<\/b>","<b>2026 Q3<\/b><br>Greater Suncoast: <b>36 sightings<\/b>","<b>2026 Q4<\/b><br>Greater Suncoast: <b>9 sightings<\/b>"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,180,216,0.92)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"(Greater Suncoast (Tampa–Sarasota–Charlotte),1)","legendgroup":"(Greater Suncoast (Tampa–Sarasota–Charlotte),1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[19263,19263,null,19599,19599,null,20005,20005],"y":[-3.9000000000000004,81.900000000000006,null,-3.9000000000000004,81.900000000000006,null,-3.9000000000000004,81.900000000000006],"text":"","type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(217,4,41,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[19219],"y":[71],"text":"🌀 Ian<br />(Sep '22)","hovertext":"","textfont":{"size":12.09448818897638,"color":"rgba(217,4,41,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[19558],"y":[71],"text":"🌀 Idalia<br />(Aug '23)","hovertext":"","textfont":{"size":12.09448818897638,"color":"rgba(217,4,41,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[19960],"y":[71],"text":"🌀 Helene & Milton<br />(Sep–Oct '24)","hovertext":"","textfont":{"size":12.09448818897638,"color":"rgba(217,4,41,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18628,18718,18809,18901,18993,19083,19174,19266,19358,19448,19539,19631,19723,19814,19905,19997,20089,20179,20270,20362,20454,20544,20635,20727],"y":[5,5,7,8,10,9,7,6,19,9,7,4,16,7,6,3,14,10,5,12,16,11,7,4],"text":"","type":"scatter","mode":"lines","line":{"width":4.9133858267716546,"color":"rgba(255,77,109,1)","dash":"solid"},"hoveron":"points","name":"(Sarasota Bay Study Area Only,1)","legendgroup":"(Sarasota Bay Study Area Only,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18628,18718,18809,18901,18993,19083,19174,19266,19358,19448,19539,19631,19723,19814,19905,19997,20089,20179,20270,20362,20454,20544,20635,20727],"y":[5,5,7,8,10,9,7,6,19,9,7,4,16,7,6,3,14,10,5,12,16,11,7,4],"text":["<b>2021 Q1<\/b><br>Sarasota Bay Only: <b>5 sightings<\/b>","<b>2021 Q2<\/b><br>Sarasota Bay Only: <b>5 sightings<\/b>","<b>2021 Q3<\/b><br>Sarasota Bay Only: <b>7 sightings<\/b>","<b>2021 Q4<\/b><br>Sarasota Bay Only: <b>8 sightings<\/b>","<b>2022 Q1<\/b><br>Sarasota Bay Only: <b>10 sightings<\/b>","<b>2022 Q2<\/b><br>Sarasota Bay Only: <b>9 sightings<\/b>","<b>2022 Q3<\/b><br>Sarasota Bay Only: <b>7 sightings<\/b>","<b>2022 Q4<\/b><br>Sarasota Bay Only: <b>6 sightings<\/b>","<b>2023 Q1<\/b><br>Sarasota Bay Only: <b>19 sightings<\/b>","<b>2023 Q2<\/b><br>Sarasota Bay Only: <b>9 sightings<\/b>","<b>2023 Q3<\/b><br>Sarasota Bay Only: <b>7 sightings<\/b>","<b>2023 Q4<\/b><br>Sarasota Bay Only: <b>4 sightings<\/b>","<b>2024 Q1<\/b><br>Sarasota Bay Only: <b>16 sightings<\/b>","<b>2024 Q2<\/b><br>Sarasota Bay Only: <b>7 sightings<\/b>","<b>2024 Q3<\/b><br>Sarasota Bay Only: <b>6 sightings<\/b>","<b>2024 Q4<\/b><br>Sarasota Bay Only: <b>3 sightings<\/b>","<b>2025 Q1<\/b><br>Sarasota Bay Only: <b>14 sightings<\/b>","<b>2025 Q2<\/b><br>Sarasota Bay Only: <b>10 sightings<\/b>","<b>2025 Q3<\/b><br>Sarasota Bay Only: <b>5 sightings<\/b>","<b>2025 Q4<\/b><br>Sarasota Bay Only: <b>12 sightings<\/b>","<b>2026 Q1<\/b><br>Sarasota Bay Only: <b>16 sightings<\/b>","<b>2026 Q2<\/b><br>Sarasota Bay Only: <b>11 sightings<\/b>","<b>2026 Q3<\/b><br>Sarasota Bay Only: <b>7 sightings<\/b>","<b>2026 Q4<\/b><br>Sarasota Bay Only: <b>4 sightings<\/b>"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,77,109,1)","opacity":1,"size":12.09448818897638,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,77,109,1)"}},"hoveron":"points","name":"(Sarasota Bay Study Area Only,1)","legendgroup":"(Sarasota Bay Study Area Only,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":44.227480282274811,"r":8.3022000830220026,"b":42.34122042341221,"l":42.34122042341221},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":16.604400166044005},"title":{"text":"<b> Quarterly Dolphin Sightings Along Florida's Central Gulf Coast (2021–2026) <\/b>","font":{"color":"rgba(3,4,94,1)","family":"","size":19.925280199252807},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18483.450000000001,20871.549999999999],"tickmode":"array","ticktext":["2022","2024","2026"],"tickvals":[18993,19723,20454],"categoryorder":"array","categoryarray":["2022","2024","2026"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.1511000415110013,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835205},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.75474546209290927,"zeroline":false,"anchor":"y","title":{"text":"Quarter (2021–2026)","font":{"color":"rgba(0,0,0,1)","family":"","size":16.604400166044005}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.9000000000000004,81.900000000000006],"tickmode":"array","ticktext":["0","20","40","60","80"],"tickvals":[4.4408920985006262e-16,20,40,60.000000000000007,80],"categoryorder":"array","categoryarray":["0","20","40","60","80"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.1511000415110013,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835198},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.75474546209290927,"zeroline":false,"anchor":"x","title":{"text":"Quarterly Verified Sightings","font":{"color":"rgba(0,0,0,1)","family":"","size":16.604400166044005}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205},"orientation":"h","x":0.080000000000000002,"y":1.1000000000000001,"xanchor":"center","yanchor":"bottom","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":16.604400166044005}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"27e96162043f":{"x":{},"y":{},"fill":{},"text":{},"type":"bar"},"27e92e0331a3":{"xintercept":{}},"27e9ee35ac":{"x":{},"y":{}},"27e97405047d":{"x":{},"y":{}},"27e934ac7231":{"x":{},"y":{}},"27e94b9def96":{"x":{},"y":{},"colour":{}},"27e9e8708fa":{"x":{},"y":{},"colour":{},"text":{}}},"cur_data":"27e96162043f","visdat":{"27e96162043f":["function (y) ","x"],"27e92e0331a3":["function (y) ","x"],"27e9ee35ac":["function (y) ","x"],"27e97405047d":["function (y) ","x"],"27e934ac7231":["function (y) ","x"],"27e94b9def96":["function (y) ","x"],"27e9e8708fa":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<p>Crucially, rising annual sighting totals from 2021 to 2026 <strong>do not prove that Sarasota Bay’s dolphin population grew</strong>. Instead, upward long-term trends in GBIF/iNaturalist records primarily reflect expanding smartphone wildlife photography and increased post-2021 outdoor recreation. Meanwhile, the sharp autumn dips—especially <strong>Q3–Q4 2024</strong>, when <strong>Hurricanes Debby, Helene, and Milton</strong> made back-to-back impacts along Sarasota Bay, damaging marinas, piers, and barrier islands—illustrate how severe weather temporarily halts coastal observation effort.</p>
-<p>Long-term demographic studies provide the true biological baseline behind these fluctuations. <a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full">Wells et al.&nbsp;(2025)</a> report a mean annual birth rate of <strong>0.071</strong> balanced against a mean annual maximum loss rate of <strong>0.072</strong>, showing that Sarasota Bay’s resident community remains remarkably stable from year to year—and historically stays inside its home range even through major hurricanes, while elevated loss episodes typically trace to severe <strong>Karenia brevis</strong> red-tide blooms and prey depletion rather than wind events alone.</p>
+<section id="why-did-overall-sightings-climb-from-2021-to-2026" class="level3">
+<h3 class="anchored" data-anchor-id="why-did-overall-sightings-climb-from-2021-to-2026">📌 Why Did Overall Sightings Climb From 2021 to 2026?</h3>
+<ul>
+<li><strong>More smartphone cameras, stable dolphin numbers:</strong> Suncoast sightings nearly doubled from <strong>98 in 2021</strong> to <strong>179 in 2026</strong> mainly because more people log wildlife on apps like iNaturalist.</li>
+<li><strong>Balanced population:</strong> <a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1531528/full">Wells et al.&nbsp;(2025)</a> found Sarasota Bay’s annual birth rate (<strong>7.1%</strong>) almost perfectly matches its annual loss rate (<strong>7.2%</strong>), keeping the community remarkably steady!</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
